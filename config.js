@@ -16,6 +16,11 @@
 
 window.INVITE = {
 
+  /* ---- 0. What opens first at your main link? -----------------------
+     "gallery"    = a page showing all designs (tap one to open it)
+     "invitation" = your own invitation opens straight away            */
+  home: "gallery",
+
   /* ---- 1. What kind of invitation? ----------------------------------
      wedding · engagement · reception · anniversary · birthday ·
      housewarming · babyshower · naming · mundan · puja · party        */

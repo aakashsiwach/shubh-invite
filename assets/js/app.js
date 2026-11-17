@@ -306,6 +306,7 @@
         '<button class="lb-btn lb-next" type="button" aria-label="Next photo">' + ICON("right") + "</button></div>";
     }
     h += '<div class="toast" id="toast" role="status" aria-live="polite"></div>';
+    if (ex) h += '<a class="back-btn" href="index.html">' + ICON("left") + "All designs</a>";
     return h;
   }
 

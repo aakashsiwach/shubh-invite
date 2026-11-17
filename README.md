@@ -4,6 +4,8 @@
 
 Edit one file, drop your photos into a folder, and your invitation is online with a link you can share on WhatsApp.
 
+👉 **Live demo:** https://aakashsiwach.github.io/shubh-invite/ opens a gallery of every design. Tap one to open the full animated invitation.
+
 <p align="center">
   <img src="docs/wedding-gate.jpg" width="230" alt="Opening screen with doors">
   <img src="docs/wedding-hero.jpg" width="230" alt="Wedding invitation without photo">
@@ -75,13 +77,20 @@ https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
 
 Every time you change `config.js` or add photos, the site updates by itself within a minute or two.
 
+### What opens at your link?
+By default the main link opens a **gallery of all designs**, and your own invitation is at **`…/invite.html`**. To open your invitation straight away at the main link, set this at the top of `config.js`:
+
+```js
+home: "invitation",
+```
+
 ---
 
 ## 💌 Sharing tips
 
 - **Personal links:** add `?to=` and the guest's name. Use `%20` for spaces:
-  `https://you.github.io/sharma-wedding/?to=Gupta%20Family` shows *Dear Gupta Family,*
-- **Nice WhatsApp preview:** in `index.html`, edit the `og:title`, `og:description` and `og:image` lines near the top. `og:image` must be a full link, e.g. `https://you.github.io/sharma-wedding/photos/cover.jpg`.
+  `https://you.github.io/sharma-wedding/invite.html?to=Gupta%20Family` shows *Dear Gupta Family,*
+- **Nice WhatsApp preview:** in `invite.html`, edit the `og:title`, `og:description` and `og:image` lines near the top. `og:image` must be a full link, e.g. `https://you.github.io/sharma-wedding/photos/cover.jpg`.
 - **Privacy:** on a free GitHub account, Pages sites are public. Anyone with the link can see the page. Don't put home addresses or phone numbers there if you're not comfortable sharing them.
 
 ---
@@ -104,7 +113,7 @@ Set `type` in `config.js`. Each type sets its colours, animations, decorations a
 | `puja` | Puja & Prasad | Saffron · petals, sparkles, diyas, mandala |
 | `party` | Celebration | Black & gold · sparkles, confetti |
 
-**Preview any type:** open your site with `?example=` and a type name, e.g. `…/?example=birthday` or `…/?example=housewarming`. The sample files are in the [`examples`](examples) folder. Copy one into `config.js` to start from it.
+**Preview any type:** open the gallery (your main link) and tap a design, or go directly to `…/invite.html?example=birthday`. The sample files are in the [`examples`](examples) folder. Copy one into `config.js` to start from it.
 
 ### Change colours
 Set `palette` to one of: `maroon`, `rose`, `royal`, `emerald`, `saffron`, `blush`, `sky`, `party` or `night`.
@@ -123,12 +132,13 @@ Guests whose phones are set to *Reduce motion* automatically see a version witho
 
 ## 🧪 Try it on your computer
 
-Download the ZIP, unzip it, and **double-click `index.html`**. It opens in your browser. Nothing to install.
+Download the ZIP, unzip it, and **double-click `index.html`** (the gallery) or **`invite.html`** (your invitation). They open in your browser. Nothing to install.
 
 ## 📁 What's inside
 
 ```
-index.html          ← the page (edit only the preview tags at the top)
+index.html          ← home page: gallery of all designs
+invite.html         ← your invitation (edit only the preview tags at the top)
 config.js           ← ✏️ YOUR DETAILS — edit this
 photos/cover.jpg    ← optional main photo
 photos/gallery/     ← optional 1.jpg, 2.jpg, 3.jpg …
