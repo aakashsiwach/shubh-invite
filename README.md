@@ -1,4 +1,4 @@
-# 🪔 shubh-invite
+# 🪔 Shubh Nimantran
 
 **Beautiful, animated invitation websites for Indian occasions. No coding needed.**
 
