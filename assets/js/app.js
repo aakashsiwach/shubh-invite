@@ -47,8 +47,7 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function txt(s) { return esc(s).replace(/
-/g, "<br>"); }
+  function txt(s) { return esc(s).replace(/\\n/g, "<br>"); }
   function has(v) { return v != null && String(v).trim() !== ""; }
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
