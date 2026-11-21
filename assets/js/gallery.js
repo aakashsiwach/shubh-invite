@@ -123,7 +123,7 @@
       var user = host.split(".")[0], repo = location.pathname.split("/").filter(Boolean)[0];
       make.href = "https://github.com/" + user + "/" + (repo && repo.indexOf(".") < 0 ? repo : user + ".github.io");
     } else {
-      make.href = "https://github.com/aakashsiwach/shubh-invite";
+      make.href = "https://github.com/aakashsiwach/shubh-nimantran";
     }
 
     /* Load each sample, one at a time (each one sets window.INVITE) */
