@@ -79,3 +79,41 @@ test("both website and video creation entry points are published", () => {
   assert.match(read("builder.html"), /template-catalog\.js/);
   assert.match(read("video.html"), /assets\/js\/video\.js/);
 });
+
+test("share codec compresses invitation payloads and reads legacy links", async () => {
+  const context = {
+    window: {},
+    Blob,
+    Response,
+    TextEncoder,
+    TextDecoder,
+    CompressionStream,
+    DecompressionStream,
+    Uint8Array,
+    btoa: (value) => Buffer.from(value, "binary").toString("base64"),
+    atob: (value) => Buffer.from(value, "base64").toString("binary")
+  };
+  vm.runInNewContext(read("assets/js/share-codec.js"), context, { filename: "share-codec.js" });
+  const payload = {
+    heading: "शुभ विवाह",
+    names: ["Aarav", "Ananya"],
+    events: Array.from({ length: 8 }, (_, i) => ({ title: "Wedding celebration " + i, venue: "The Royal Palace, Jaipur", note: "Join us with your family and blessings." }))
+  };
+  const encoded = await context.window.SHUBH_LINK_CODEC.encode(payload);
+  const decoded = await context.window.SHUBH_LINK_CODEC.decode(encoded);
+  assert.deepEqual(JSON.parse(JSON.stringify(decoded)), payload);
+  assert.equal(encoded[0], "z");
+  const legacy = Buffer.from(JSON.stringify(payload), "utf8").toString("base64url");
+  const oldDecoded = await context.window.SHUBH_LINK_CODEC.decode(legacy);
+  assert.deepEqual(JSON.parse(JSON.stringify(oldDecoded)), payload);
+  assert.ok(encoded.length < legacy.length * 0.8, "compressed payload should be materially shorter");
+});
+
+test("builder, invitation viewer and grouped viewer load the shared codec", () => {
+  assert.match(read("builder.html"), /assets\/js\/share-codec\.js/);
+  assert.match(read("invite.html"), /assets\/js\/share-codec\.js/);
+  assert.match(read("group.html"), /assets\/js\/share-codec\.js/);
+  assert.match(read("assets/js/builder.js"), /SHUBH_LINK_CODEC\.encode/);
+  assert.match(read("assets/js/app.js"), /SHUBH_LINK_CODEC\.decode/);
+  assert.match(read("assets/js/group.js"), /SHUBH_LINK_CODEC\.decode/);
+});
