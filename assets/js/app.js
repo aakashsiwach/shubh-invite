@@ -150,9 +150,7 @@
     var google = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
       "&text=" + encodeURIComponent(title) + "&dates=" + dates +
       "&details=" + encodeURIComponent(location.href.split("?")[0]) + "&location=" + encodeURIComponent(where || "");
-    function icsText(s) { return String(s || "").replace(/[\\,;]/g, "\\$&").replace(/
-/g, "\
-"); }
+    function icsText(s) { return String(s || "").replace(/[\\,;]/g, "\\$&").replace(/\n/g, "\\n"); }
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//shubh-invite//EN", "BEGIN:VEVENT",
       "UID:" + w.ts + "@shubh-invite", "DTSTAMP:" + stamp(Date.now()),
@@ -160,8 +158,7 @@
       w.hasTime ? "DTEND:" + stamp(w.ts + 4 * 3600000) : "DTEND;VALUE=DATE:" + dayStamp(w, 1),
       "SUMMARY:" + icsText(title), "LOCATION:" + icsText(where), "DESCRIPTION:" + icsText(location.href.split("?")[0]),
       "END:VEVENT", "END:VCALENDAR"
-    ].join("\r
-");
+    ].join("\r\n");
     return { google: google, ics: "data:text/calendar;charset=utf-8," + encodeURIComponent(ics) };
   }
 
