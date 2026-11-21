@@ -180,7 +180,7 @@
   function templatesFor(sub) {
     var type = SUBS[sub].type;
     var originals = (window.SHUBH_TEMPLATES || []).filter(function (t) { return t.type === type; }).map(function (t) {
-      return { id: "catalog-" + t.id, label: t.name, palette: t.config.palette, style: t.config.style, effects: t.config.effects, decor: t.config.decor, emblem: t.config.emblem };
+      return { id: "catalog-" + t.id, label: t.name, palette: t.config.palette, style: t.config.style, effects: t.config.effects, decor: t.config.decor, emblem: t.config.emblem, motif: t.config.motif, entrance: t.config.entrance };
     });
     return UNIVERSAL.concat(TEMPLATES[SUBS[sub].family] || TEMPLATES.couple, originals);
   }
@@ -301,7 +301,7 @@
     var tpl = findTemplate(card.sub, card.template);
     var d = card.data || {};
     var cfg = { type: sub.type, timezone: "+05:30" };
-    if (tpl) { cfg.palette = tpl.palette; cfg.style = tpl.style; cfg.effects = tpl.effects; cfg.decor = tpl.decor; cfg.emblem = tpl.emblem; }
+    if (tpl) { cfg.palette = tpl.palette; cfg.style = tpl.style; cfg.effects = tpl.effects; cfg.decor = tpl.decor; cfg.emblem = tpl.emblem; if (tpl.motif) cfg.motif = tpl.motif; if (tpl.entrance) cfg.entrance = tpl.entrance; }
 
     SCHEMAS[sub.schema].forEach(function (sec) {
       sec.fields.forEach(function (f) {
@@ -514,8 +514,8 @@
       templatesFor(sub).forEach(function (t) {
         var sw = el(
           '<button class="tpl" data-pal="' + t.palette + '">' +
-            '<span class="tpl-swatch swatch-' + t.palette + '"></span>' +
-            '<span class="tpl-label">' + esc(t.label) + "</span>" +
+            '<span class="tpl-swatch swatch-' + t.palette + (t.motif ? ' motif-' + esc(t.motif) : '') + '"></span>' +
+            '<span class="tpl-label">' + esc(t.label) + (t.motif ? '<small class="tpl-kind">' + esc(t.motif.replace(/-/g, ' ')) + ' animated</small>' : '') + "</span>" +
           "</button>"
         );
         sw.addEventListener("click", function () {
