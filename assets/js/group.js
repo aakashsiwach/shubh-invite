@@ -32,7 +32,7 @@
   if (!mm) { fail("This link is missing its invitation. Ask the host to share it again."); return; }
 
   var data;
-  try { data = unpack(mm[1]); } catch (e) { data = null; }
+  try { data = await window.SHUBH_LINK_CODEC.decode(mm[1]); } catch (e) { data = null; }
   if (!data || !Array.isArray(data.items) || !data.items.length) {
     fail("This invitation link looks damaged. Ask the host to share it again.");
     return;
