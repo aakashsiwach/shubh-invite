@@ -75,6 +75,31 @@ window.InviteEffects = (function () {
         c.restore();
       }
     },
+    feathers: {
+      count: 14,
+      colors: ["#2AAE9A", "#2D84B8", "#1E647F", "#D5B65C"],
+      spawn: function (p, w, h, first) { p.x = R(0, w); p.y = first ? R(0, h) : h + R(20, 100); p.s = R(10, 20); p.vy = R(.35, .75); p.vx = R(-.35, .35); p.r = R(-.7, .7); p.vr = R(-.012, .012); p.ph = R(0, TAU); },
+      step: function (p) { p.ph += .018; p.x += p.vx + Math.sin(p.ph) * .35; p.y -= p.vy; p.r += p.vr; },
+      dead: function (p) { return p.y < -60; },
+      draw: function (c, p) {
+        c.save(); c.translate(p.x, p.y); c.rotate(p.r); c.globalAlpha = .78;
+        c.fillStyle = p.c; c.beginPath(); c.moveTo(0, -p.s * 1.8); c.quadraticCurveTo(p.s * 1.5, -p.s * .2, 0, p.s * 2); c.quadraticCurveTo(-p.s * 1.2, 0, 0, -p.s * 1.8); c.fill();
+        c.strokeStyle = "rgba(255,238,175,.75)"; c.lineWidth = 1; c.beginPath(); c.moveTo(0, -p.s * 1.5); c.lineTo(0, p.s * 1.6); c.stroke();
+        c.restore();
+      }
+    },
+    embers: {
+      count: 24,
+      colors: ["#FFB347", "#FFD36A", "#F47B38", "#FFF0B2"],
+      spawn: function (p, w, h, first) { p.x = R(0, w); p.y = first ? R(0, h) : h + R(5, 40); p.s = R(1.5, 4); p.vy = R(.45, 1.3); p.vx = R(-.35, .35); p.ph = R(0, TAU); p.life = R(90, 190); p.t = 0; },
+      step: function (p) { p.t++; p.ph += .05; p.x += p.vx + Math.sin(p.ph) * .3; p.y -= p.vy; },
+      dead: function (p) { return p.t > p.life || p.y < -30; },
+      draw: function (c, p) {
+        var a = Math.sin(Math.PI * p.t / p.life);
+        c.save(); c.globalAlpha = a * .9; c.shadowBlur = 14; c.shadowColor = p.c; c.fillStyle = p.c;
+        c.beginPath(); c.arc(p.x, p.y, p.s * (.6 + a), 0, TAU); c.fill(); c.restore();
+      }
+    },
     bubbles: {
       count: 16,
       colors: ["rgba(255,255,255,.7)"],
