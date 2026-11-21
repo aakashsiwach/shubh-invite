@@ -95,7 +95,7 @@
     var decor = (cfg.decor || T.decor);
     var feats = fx.map(function (f) { return FX_WORDS[f]; }).concat(decor.map(function (x) { return DECOR_WORDS[x]; })).filter(Boolean);
     var vars = "--bg:" + P.bg + ";--bg-deep:" + P.bgDeep + ";--glow:" + P.glow + ";--accent:" + P.accent + ";--accent-soft:" + P.accentSoft + ";--text:" + P.text;
-    return '<a class="card reveal" data-cat="' + d.cat + '" href="invite.html?example=' + (d.id || d.type) + '" style="' + vars + '">' +
+    return '<a class="card reveal" data-cat="' + d.cat + '" href="invite.html?' + (d.catalog ? "template" : "example") + '=' + (d.id || d.type) + '" style="' + vars + '">' +
       '<div class="phone style-' + style + '" aria-hidden="true">' +
         miniDecor(decor) + miniFx(fx[0]) +
         '<div class="m-body">' +
