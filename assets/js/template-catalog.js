@@ -11,7 +11,7 @@
         id: category + "-" + String(i + 1).padStart(2, "0"),
         name: r[0], category: category, type: type,
         description: r[5] || "An original " + r[0].toLowerCase() + " invitation design.",
-        config: { type: type, palette: palette, style: style, effects: effects, decor: decor, emblem: r[2] || "sparkle" }
+        config: { type: type, palette: palette, style: style, effects: effects, decor: decor, emblem: r[2] || "sparkle", motif: r[6] || "", entrance: r[7] || "rise" }
       });
     });
   }
@@ -21,6 +21,22 @@
     ["Red Gulab Celebration","redcream","ganesh"],["Botanical Mehfil","emerald","leaf"],["Golden Jharokha","ivory","kalash"],["Lotus Garden","rose","flower"],["Indigo Heirloom","royal","mandala"],["Marigold Courtyard","saffron","sun"],["Plum Velvet","grape","sparkle"],["Desert Dusk","sunset","sun"],["Classic Toran","maroon","om"],["Champagne Elegance","ivory","ring"],
     ["South Indian Temple","saffron","diya",["toran","bells","diyas","mandala"],["petals"]],["Punjabi Phulkari","fiesta","flower"],["Bengali Shubho Drishti","redcream","lotus"],["Gujarati Bandhani","sunset","mandala"],["Rajasthani Royal","maroon","kalash"],["Kashmiri Chinar","emerald","leaf"],["Coastal Pastel","tropical","shell"],["Mughal Garden","emerald","flower"],["Modern Monogram","night","star",[],["sparkles"]],["Floral Watercolour","pearl","flower",["florals"],["petals","hearts"]],
     ["Vintage Postcard","ivory","mail",["florals"],["sparkles"]],["Art Deco Gold","night","star",["mandala"],["sparkles"]],["Terracotta Folk","saffron","sun"],["Sage & Champagne","emerald","leaf"],["Lavender Romance","grape","heart"],["Coral Celebration","fiesta","flower"],["Minimal Line Art","pearl","ring",[],[]],["Grand Palace","royal","crown"],["Lotus & Gold","ivory","lotus"],["Festive Firelight","sunset","diya"]
+  ]);
+  add("divine-wedding", "wedding", [
+    ["Radha Krishna — Vrindavan Divine Love","royal","flute",["toran","bells","diyas","lotus"],["petals","sparkles","feathers","hearts"],"A moonlit Vrindavan-inspired invitation with a peacock-feather halo, flute shimmer and drifting petals.","krishna","blur"],
+    ["Shiv & Parvati — Kailash Blessings","night","om",["mandala","bells","diyas"],["sparkles","embers","petals"],"A Himalayan night-sky design with a glowing crescent, trishul and floating starlight.","shiv","zoom"],
+    ["Radha Rani Lotus Garden","rose","lotus",["lotus","florals"],["petals","hearts","sparkles"],"A soft lotus garden with a gentle floral drift and rose-gold glow.","radha","fade"],
+    ["Shiv Shakti Sacred Union","royal","trishul",["mandala","bells"],["sparkles","embers"],"A deep indigo sacred design with a moving trishul aura and celestial particles.","shiv","flip"],
+    ["Sita Ram — Ayodhya Utsav","saffron","diya",["toran","bells","diyas","arch"],["petals","sparkles","embers"],"A warm Ayodhya-inspired celebration with temple bells and glowing diyas.","ram-sita","drop"],
+    ["Krishna Bansuri — Peacock Blue","royal","flute",["lotus","mandala"],["feathers","sparkles","petals"],"A peacock-blue invitation with a floating bansuri and feather shimmer.","krishna","pan"]
+  ]);
+  add("divine-puja", "puja", [
+    ["Mahashivratri — Om Namah Shivaya","night","trishul",["mandala","bells","diyas"],["embers","sparkles"],"A star-lit Kailash theme with a softly glowing crescent and trishul.","shiv","zoom"],
+    ["Gauri Puja — Shiv Parvati","emerald","lotus",["lotus","toran","diyas"],["petals","sparkles","hearts"],"A graceful Gauri-Shankar theme with lotus petals and warm temple light.","shiv","blur"],
+    ["Janmashtami — Nand Gopal","royal","flute",["lotus","bells"],["feathers","sparkles","petals"],"A midnight-blue Krishna celebration with feather shimmer and floating petals.","krishna","drop"],
+    ["Radhashtami — Barsana","rose","lotus",["lotus","florals"],["petals","hearts","sparkles"],"A Barsana-inspired rose garden with soft floating petals.","radha","fade"],
+    ["Saraswati Vandana","pearl","lotus",["lotus","mandala"],["petals","sparkles"],"An ivory and gold devotional design with a serene lotus halo.","saraswati","rise"],
+    ["Lakshmi Deepotsav","saffron","diya",["lotus","diyas","bells"],["embers","sparkles","petals"],"A glowing diya and lotus invitation with a golden festive atmosphere.","lakshmi","flip"]
   ]);
   add("engagement", "engagement", [
     ["Rose Ring Ceremony","rose","ring"],["Blush Promise","blush","heart"],["Royal Sagai","maroon","ring"],["Champagne Proposal","ivory","ring"],["Midnight Spark","night","sparkle"],["Lavender Promise","grape","heart"],["Garden Engagement","emerald","flower"],["Sunset Roka","sunset","sun"],["Pearl Minimal Sagai","pearl","ring",[],[]],["Fiesta Celebration","fiesta","heart"]
@@ -49,8 +65,8 @@
 
   window.SHUBH_TEMPLATES = items;
   window.SHUBH_TEMPLATE_CATEGORIES = [
-    {id:"all",label:"All templates"},{id:"wedding",label:"Wedding"},{id:"engagement",label:"Engagement"},
+    {id:"all",label:"All templates"},{id:"wedding",label:"Wedding"},{id:"divine-wedding",label:"Divine & Spiritual"},{id:"engagement",label:"Engagement"},
     {id:"anniversary",label:"Anniversary"},{id:"birthday",label:"Birthday"},{id:"baby",label:"Baby & Kids"},
-    {id:"house",label:"Housewarming"},{id:"puja",label:"Puja"},{id:"festival",label:"Festivals"},{id:"party",label:"Parties"}
+    {id:"house",label:"Housewarming"},{id:"puja",label:"Puja"},{id:"divine-puja",label:"Devotional"},{id:"festival",label:"Festivals"},{id:"party",label:"Parties"}
   ];
 })();
