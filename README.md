@@ -165,6 +165,20 @@ Guests whose phones are set to *Reduce motion* automatically see a version witho
 
 ---
 
+## 🧪 Development and checks
+
+The site itself has no build step or runtime dependencies. Node.js 20+ is only needed to run the repository checks:
+
+```bash
+npm test
+```
+
+The test suite checks JavaScript syntax, the classic invitation configuration, published repository links, removed RSVP references, and Unicode-safe invitation payload encoding. GitHub Actions runs the same checks on pushes to `main` and pull requests.
+
+## 🔐 Privacy and security
+
+The builder is client-only: drafts stay in the current browser's local storage, and the PIN is a convenience lock rather than secure authentication. Shared invitation links carry their data in the URL fragment; anyone with the full link can read that data. GitHub Pages files are public. Avoid putting sensitive personal details in invitations. See [SECURITY.md](SECURITY.md) for details.
+
 ## 🧪 Try it on your computer
 
 Download the ZIP, unzip it, and **double-click `index.html`** (the gallery) or **`invite.html`** (your invitation). They open in your browser. Nothing to install.
