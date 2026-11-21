@@ -4,7 +4,7 @@
   function toBase64Url(bytes) {
     var binary = "";
     for (var i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(i, Math.min(i + 0x8000, bytes.length)));
-    return btoa(binary).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/, "");
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   }
   function fromBase64Url(value) {
     var b64 = value.replace(/-/g, "+").replace(/_/g, "/");
