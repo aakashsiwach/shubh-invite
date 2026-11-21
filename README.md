@@ -31,9 +31,19 @@ Everything is packed **into the link itself** (`#i=…` / `#g=…`), so sharing 
 
 ---
 
+## 🎨 Original template collection — websites + videos
+
+The gallery now includes **100 original invitation presets** across nine collections: Wedding (40), Engagement (10), Anniversary (6), Birthday (10), Baby & Kids (8), Housewarming (6), Puja (6), Festivals (6), and Parties (8). These are original combinations of palettes, typography styles, motifs and motion effects—not copied InviteMaker artwork or video assets.
+
+Every catalogue design can be opened as an interactive invitation website. The **Create your invitation** builder also exposes matching catalogue presets for the selected occasion.
+
+### Animated invitation video studio — `video.html`
+
+Open **Create an invitation video** from the gallery to customize names, heading, date, venue and message. The studio renders a 9:16 animated canvas and records a 12-second clip locally in the browser. It exports **MP4 when the browser supports MP4 recording**, otherwise WebM. Use a current Chrome or Edge browser over HTTPS or localhost; no backend or uploaded personal data is required. This is a browser-rendered motion design, not a server-side full-HD video service.
+
 ## ✨ What you get
 
-- **11 invitation types:** Wedding, Engagement (Sagai), Reception, Anniversary, Birthday, Griha Pravesh, Godh Bharai, Naamkaran, Mundan, Puja / Katha, and Party
+- **100 original visual presets** across 9 occasion collections, plus 11 invitation content types: Wedding, Engagement (Sagai), Reception, Anniversary, Birthday, Griha Pravesh, Godh Bharai, Naamkaran, Mundan, Puja / Katha, and Party
 - **Works with or without photos.** Add photos and they appear automatically. Without photos you get a decorated design.
 - **Animations:** falling marigold petals, a swaying toran, ringing temple bells, flickering diyas, a rotating mandala, confetti, balloons, hearts and sparkles
 - **Opening doors.** Guests tap "Open Invitation" and the doors swing open.
