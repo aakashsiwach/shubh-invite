@@ -18,13 +18,7 @@
       mapMain: "View location on Google Maps", mapSub: "Tap to open the map & get directions",
       gcal: "Add to Google Calendar", pcal: "Add to phone calendar",
       saveDateNote: "Save the date — add a reminder below so you don't miss it.",
-      rsvp: "RSVP", respondBy: "Kindly respond by ", yourName: "Your name", willAttend: "Will you attend?",
-      accept: "Joyfully accept", decline: "Regretfully decline", numGuests: "Number of guests",
-      messageOpt: "Message (optional)", sendRsvp: "Send RSVP on WhatsApp", compliments: "With best compliments",
       allDesigns: "All designs", openInvitation: "Open Invitation", dear: "Dear ", withWord: "with",
-      waYes: "🙏 Namaste! We will be there.", waNo: "🙏 Namaste! Sorry, we won't be able to make it.",
-      waName: "Name: ", waGuests: "Guests: ", waMsg: "Message: ", thanksYes: "Thank you! Opening WhatsApp…",
-      thanksNo: "Thank you for letting us know.", needName: "Please enter your name.", toEnglish: "English", toHindi: "हिन्दी",
       months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       daysLong: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     },
@@ -34,13 +28,7 @@
       mapMain: "गूगल मैप पर स्थान देखें", mapSub: "मैप खोलें और रास्ता पाएँ",
       gcal: "गूगल कैलेंडर में जोड़ें", pcal: "फ़ोन कैलेंडर में जोड़ें",
       saveDateNote: "तिथि सुरक्षित रखें — नीचे रिमाइंडर जोड़ें ताकि आप न भूलें।",
-      rsvp: "उपस्थिति सूचित करें", respondBy: "कृपया इस तिथि तक सूचित करें: ", yourName: "आपका नाम", willAttend: "क्या आप आएँगे?",
-      accept: "सहर्ष स्वीकार", decline: "क्षमा सहित अस्वीकार", numGuests: "मेहमानों की संख्या",
-      messageOpt: "संदेश (वैकल्पिक)", sendRsvp: "व्हाट्सऐप पर उत्तर भेजें", compliments: "सादर शुभकामनाओं सहित",
       allDesigns: "सभी डिज़ाइन", openInvitation: "निमंत्रण खोलें", dear: "प्रिय ", withWord: "एवं",
-      waYes: "🙏 नमस्ते! हम अवश्य आएँगे।", waNo: "🙏 नमस्ते! क्षमा करें, हम नहीं आ पाएँगे।",
-      waName: "नाम: ", waGuests: "मेहमान: ", waMsg: "संदेश: ", thanksYes: "धन्यवाद! व्हाट्सऐप खुल रहा है…",
-      thanksNo: "सूचित करने के लिए धन्यवाद।", needName: "कृपया अपना नाम लिखें।", toEnglish: "English", toHindi: "हिन्दी",
       months: ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"],
       daysLong: ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"]
     }
