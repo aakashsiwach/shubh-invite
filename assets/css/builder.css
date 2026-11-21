@@ -158,3 +158,15 @@ button { font-family: inherit; cursor: pointer; }
 /* ---------------- toast ---------------- */
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #2a1f16; color: #fff; padding: 12px 20px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 60; font-size: 14px; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.tpl-kind { display: block; margin-top: 4px; color: var(--gold-d); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+.tpl-swatch.motif-krishna { background-image: radial-gradient(ellipse at 50% 20%, #286E8D, transparent 58%), linear-gradient(145deg,#183B70,#08132D); }
+.tpl-swatch.motif-krishna::after { content: "🪈 🦚"; display: grid; place-items: center; height: 100%; font-size: 27px; }
+.tpl-swatch.motif-radha { background-image: radial-gradient(circle at 50% 40%, #D68DA8, transparent 52%),linear-gradient(145deg,#7B3455,#32172F); }
+.tpl-swatch.motif-radha::after { content: "🪷 ♡"; display: grid; place-items: center; height: 100%; font-size: 27px; }
+.tpl-swatch.motif-shiv { background-image: radial-gradient(circle at 72% 20%,#E7D49A,transparent 22%),linear-gradient(145deg,#344C73,#0B1327); }
+.tpl-swatch.motif-shiv::after { content: "☾ 🔱"; display: grid; place-items: center; height: 100%; font-size: 27px; }
+.tpl-swatch.motif-ram-sita { background-image: radial-gradient(circle at 50% 30%,#E5A65C,transparent 42%),linear-gradient(145deg,#8A3B1E,#32110A); }
+.tpl-swatch.motif-ram-sita::after { content: "🏹"; display: grid; place-items: center; height: 100%; font-size: 30px; }
+.tpl-swatch.motif-lakshmi, .tpl-swatch.motif-saraswati { background-image: radial-gradient(circle at 50% 35%,#E6C57B,transparent 48%),linear-gradient(145deg,#80602E,#251A0B); }
+.tpl-swatch.motif-lakshmi::after, .tpl-swatch.motif-saraswati::after { content: "🪷"; display: grid; place-items: center; height: 100%; font-size: 30px; }
