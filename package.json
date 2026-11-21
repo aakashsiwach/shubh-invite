@@ -1,0 +1,8 @@
+{
+  "name": "shubh-nimantran",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static invitation website builder for Indian celebrations",
+  "scripts": { "test": "node --test" },
+  "engines": { "node": ">=20" }
+}
