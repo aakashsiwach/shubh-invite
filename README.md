@@ -222,3 +222,8 @@ assets/             ← design & code (no need to touch)
 Made with ❤️ for Indian celebrations. Free to use under the [MIT License](LICENSE). Fonts from Google Fonts (Open Font License).
 
 **Credits:** the demo couple photo (`assets/couple-photo.jpg`) is from [Pexels](https://www.pexels.com/) under the free Pexels License (no attribution required) — it's only a placeholder; add your own photo via `photos/cover.jpg` or the builder's cover field. An alternate hand-drawn illustration is in `assets/couple.svg`.
+
+
+### Shorter invitation links
+
+New website and grouped invitation links are compressed in the browser using DEFLATE before being placed in the URL fragment. The invitation remains self-contained, so GitHub Pages does not need a database or link-shortening service. Existing uncompressed links continue to open. The actual length reduction depends on how much text, event detail and media metadata the invitation contains; images themselves are not embedded by the builder.
