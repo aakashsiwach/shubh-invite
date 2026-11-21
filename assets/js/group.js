@@ -11,19 +11,10 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function pack(obj) {
-    var json = JSON.stringify(obj);
-    var b64 = btoa(unescape(encodeURIComponent(json)));
-    return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  }
-  function unpack(str) {
-    var b64 = str.replace(/-/g, "+").replace(/_/g, "/");
-    while (b64.length % 4) b64 += "=";
-    return JSON.parse(decodeURIComponent(escape(atob(b64))));
-  }
-  function inviteURL(cfg) {
+  async function inviteURL(cfg) {
+    var packed = await window.SHUBH_LINK_CODEC.encode(cfg);
     var base = location.href.replace(/[?#].*$/, "").replace(/[^/]*$/, "invite.html");
-    return base + "#i=" + pack(cfg);
+    return base + "#i=" + packed;
   }
 
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -37,7 +28,7 @@
   var root = document.getElementById("group");
   function fail(msg) { root.innerHTML = '<div class="g-problem"><h1>Hmm…</h1><p>' + msg + "</p></div>"; }
 
-  var mm = /[#&]g=([^&]+)/.exec(location.hash || "");
+  (async function () {\n  var mm = /[#&]g=([^&]+)/.exec(location.hash || "");
   if (!mm) { fail("This link is missing its invitation. Ask the host to share it again."); return; }
 
   var data;
@@ -58,7 +49,7 @@
     hi: { dear: "प्रिय ", title: "आप सादर आमंत्रित हैं", sub1: "आप निम्नलिखित समारोह में आमंत्रित हैं। खोलने के लिए कार्ड पर टैप करें।", subN: "आप निम्नलिखित समारोहों में आमंत्रित हैं। खोलने के लिए कार्ड पर टैप करें।", open: "खोलें →" }
   }[lang];
 
-  var html = '<section class="g-head">';
+  var inviteUrls = await Promise.all(data.items.map(function (it) { return inviteURL(it.c || {}); }));\n  var html = '<section class="g-head">';
   html += '<p class="g-om" lang="sa">॥ शुभ ॥</p>';
   if (guest) html += '<p class="g-dear">' + esc(S.dear) + esc(guest) + ",</p>";
   html += '<h1>' + esc(data.t || S.title) + "</h1>";
@@ -70,7 +61,7 @@
     var cfg = it.c || {};
     var when = whenText(cfg);
     var names = Array.isArray(cfg.names) ? cfg.names.join(" & ") : "";
-    html += '<a class="g-card pal-' + esc(cfg.palette || "maroon") + '" href="' + esc(inviteURL(cfg)) + '">' +
+    html += '<a class="g-card pal-' + esc(cfg.palette || "maroon") + '" href="' + esc(inviteUrls[index]) + '">' +
       '<span class="g-card-label">' + esc(it.l || cfg.heading || "Invitation") + "</span>" +
       (names ? '<span class="g-card-names">' + esc(names) + "</span>" : "") +
       (cfg.heading && cfg.heading !== it.l ? '<span class="g-card-head">' + esc(cfg.heading) + "</span>" : "") +
