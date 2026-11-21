@@ -4,7 +4,7 @@
 
 Edit one file, drop your photos into a folder, and your invitation is online with a link you can share on WhatsApp.
 
-👉 **Live demo:** https://aakashsiwach.github.io/shubh-invite/ opens a gallery of every design. Tap one to open the full animated invitation.
+👉 **Live demo:** https://aakashsiwach.github.io/shubh-nimantran/ opens a gallery of every design. Tap one to open the full animated invitation.
 
 <p align="center">
   <img src="docs/wedding-gate.jpg" width="230" alt="Opening screen with doors">
@@ -43,7 +43,6 @@ Everything is packed **into the link itself** (`#i=…` / `#g=…`), so sharing 
 - **Photo gallery** with a full-screen viewer that you can swipe on phones
 - **Venue** with a Google Maps "Get directions" button
 - **Add to calendar** (Google Calendar or the phone's calendar)
-- **RSVP on WhatsApp.** Replies come straight to your WhatsApp. No server is needed.
 - **Background music** (optional)
 - Works on phones and computers, supports Hindi text, and is free to host on GitHub Pages
 
@@ -57,7 +56,7 @@ Click the green **Use this template** button, then **Create a new repository**. 
 > No button? Click **Fork** instead, or use **Code → Download ZIP** to work on your computer.
 
 ### 2. Fill in your details
-Open **`config.js`** and click the ✏️ pencil icon. Change the text inside the "quotes": names, date, events, venue and your WhatsApp number. Then click **Commit changes**.
+Open **`config.js`** and click the ✏️ pencil icon. Change the text inside the "quotes": names, date, events and venue. Then click **Commit changes**.
 
 ```js
 type: "wedding",                 // wedding, birthday, housewarming, babyshower …
@@ -151,7 +150,7 @@ lang:    "hi",          // "en" (English) or "hi" (Hindi) — translates the fix
 map:     "none",        // hide the "View location on Google Maps" link (default: shown)
 density: "comfortable", // more spacing (default is compact = less scrolling)
 ```
-Pick **English or हिन्दी** in the builder (Design & layout). All the fixed text — countdown, venue, RSVP, calendar and buttons — switches language, and default headings/opening titles get Hindi versions. Every invitation also has a **one-tap language toggle** in the corner so guests can switch. Pages are **compact by default** to reduce scrolling.
+Pick **English or हिन्दी** in the builder (Design & layout). All the fixed text — countdown, venue, calendar and buttons — switches language, and default headings/opening titles get Hindi versions. Every invitation also has a **one-tap language toggle** in the corner so guests can switch. Pages are **compact by default** to reduce scrolling.
 The venue section shows an eye-catching **map link** with a location pin that opens the venue in Google Maps — it uses the `venue.mapLink` you paste (which points to the exact place) or searches the venue name + address. The **Save the Date** block offers *Add to Google Calendar* and *Add to phone calendar* so guests can set a reminder.
 
 ### Change the animations
@@ -193,7 +192,6 @@ assets/             ← design & code (no need to touch)
 | Photos don't show | Check the names: `cover.jpg` and `gallery/1.jpg`. GitHub treats `Cover.JPG` and `cover.jpg` as different names. Number gallery photos with no gaps. |
 | Link shows 404 | Wait 2 minutes after turning on Pages, and check that **Settings → Pages** says *Your site is live*. |
 | Countdown is missing | The date must be in the future and in the format `"2027-02-14T19:30"`. |
-| RSVP form is missing | Add your WhatsApp number in `rsvp.whatsapp` (country code, digits only, e.g. `"919876543210"`). |
 
 ---
 
