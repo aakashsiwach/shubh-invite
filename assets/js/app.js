@@ -47,7 +47,8 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function txt(s) { return esc(s).replace(/\n/g, "<br>"); }
+  function txt(s) { return esc(s).replace(/
+/g, "<br>"); }
   function has(v) { return v != null && String(v).trim() !== ""; }
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
@@ -150,7 +151,9 @@
     var google = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
       "&text=" + encodeURIComponent(title) + "&dates=" + dates +
       "&details=" + encodeURIComponent(location.href.split("?")[0]) + "&location=" + encodeURIComponent(where || "");
-    function icsText(s) { return String(s || "").replace(/[\\,;]/g, "\\$&").replace(/\n/g, "\\n"); }
+    function icsText(s) { return String(s || "").replace(/[\\,;]/g, "\\$&").replace(/
+/g, "\
+"); }
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//shubh-invite//EN", "BEGIN:VEVENT",
       "UID:" + w.ts + "@shubh-invite", "DTSTAMP:" + stamp(Date.now()),
@@ -158,7 +161,8 @@
       w.hasTime ? "DTEND:" + stamp(w.ts + 4 * 3600000) : "DTEND;VALUE=DATE:" + dayStamp(w, 1),
       "SUMMARY:" + icsText(title), "LOCATION:" + icsText(where), "DESCRIPTION:" + icsText(location.href.split("?")[0]),
       "END:VEVENT", "END:VCALENDAR"
-    ].join("\r\n");
+    ].join("\r
+");
     return { google: google, ics: "data:text/calendar;charset=utf-8," + encodeURIComponent(ics) };
   }
 
@@ -595,6 +599,7 @@
     var m = /[#&]i=([^&]+)/.exec(location.hash || "");
     if (!m) return null;
     try {
+      if (window.SHUBH_LINK_CODEC) return await window.SHUBH_LINK_CODEC.decode(m[1]);
       var b64 = m[1].replace(/-/g, "+").replace(/_/g, "/");
       while (b64.length % 4) b64 += "=";
       return JSON.parse(decodeURIComponent(escape(atob(b64))));
@@ -607,7 +612,8 @@
     if (e && e.filename && /config\.js|examples\//.test(e.filename)) problem = e.message + " (line " + e.lineno + ")";
   });
 
-  (async function () {\n  var packed = await decodePacked();
+  (async function () {
+  var packed = await decodePacked();
   if (packed) {
     window.INVITE = packed;
     try { start(); }
