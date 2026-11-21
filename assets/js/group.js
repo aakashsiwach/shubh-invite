@@ -28,7 +28,8 @@
   var root = document.getElementById("group");
   function fail(msg) { root.innerHTML = '<div class="g-problem"><h1>Hmm…</h1><p>' + msg + "</p></div>"; }
 
-  (async function () {\n  var mm = /[#&]g=([^&]+)/.exec(location.hash || "");
+  (async function () {
+  var mm = /[#&]g=([^&]+)/.exec(location.hash || "");
   if (!mm) { fail("This link is missing its invitation. Ask the host to share it again."); return; }
 
   var data;
@@ -49,7 +50,8 @@
     hi: { dear: "प्रिय ", title: "आप सादर आमंत्रित हैं", sub1: "आप निम्नलिखित समारोह में आमंत्रित हैं। खोलने के लिए कार्ड पर टैप करें।", subN: "आप निम्नलिखित समारोहों में आमंत्रित हैं। खोलने के लिए कार्ड पर टैप करें।", open: "खोलें →" }
   }[lang];
 
-  var inviteUrls = await Promise.all(data.items.map(function (it) { return inviteURL(it.c || {}); }));\n  var html = '<section class="g-head">';
+  var inviteUrls = await Promise.all(data.items.map(function (it) { return inviteURL(it.c || {}); }));
+  var html = '<section class="g-head">';
   html += '<p class="g-om" lang="sa">॥ शुभ ॥</p>';
   if (guest) html += '<p class="g-dear">' + esc(S.dear) + esc(guest) + ",</p>";
   html += '<h1>' + esc(data.t || S.title) + "</h1>";
@@ -57,7 +59,7 @@
   html += "</section>";
 
   html += '<div class="g-grid">';
-  data.items.forEach(function (it) {
+  data.items.forEach(function (it, index) {
     var cfg = it.c || {};
     var when = whenText(cfg);
     var names = Array.isArray(cfg.names) ? cfg.names.join(" & ") : "";
@@ -82,4 +84,5 @@
       a.href = a.href.replace("#i=", "?to=" + encodeURIComponent(guest) + "#i=");
     });
   }
-})();
+  })();
+})();;
