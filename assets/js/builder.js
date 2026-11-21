@@ -49,11 +49,7 @@
   }
 
   /* ---- pack invitation data into a URL-safe string (matches app.js) ---- */
-  function pack(obj) {
-    var json = JSON.stringify(obj);
-    var b64 = btoa(unescape(encodeURIComponent(json)));
-    return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  }
+  async function pack(obj) { return window.SHUBH_LINK_CODEC.encode(obj); }
   function pageURL(page, hashKey, packed) {
     var base = location.href.replace(/[?#].*$/, "").replace(/[^/]*$/, page);
     return base + "#" + hashKey + "=" + packed;
@@ -371,7 +367,7 @@
     if (!has(cfg.music)) cfg.music = "none";
     return cfg;
   }
-  function cardURL(card) { return pageURL("invite.html", "i", pack(buildConfig(card))); }
+  async function cardURL(card) { return pageURL("invite.html", "i", await pack(buildConfig(card))); }
   function cardLabel(card) { return card.name || SUBS[card.sub].label; }
 
   /* ============================ state ============================ */
@@ -547,7 +543,7 @@
     var card = currentCard(); var frame = $("#preview");
     if (!card || !frame) return;
     clearTimeout(previewTimer);
-    previewTimer = setTimeout(function () { frame.src = cardURL(card); }, 450);
+    previewTimer = setTimeout(async function () { var url = await cardURL(card); if (frame && frame.isConnected) frame.src = url; }, 450);
   }
 
   function renderEditor() {
@@ -771,15 +767,15 @@
   }
 
   // Share a set (or the whole group when set is null) as one grouped link.
-  function shareSet(set) {
+  async function shareSet(set) {
     var p = currentProject();
     var cards = set ? p.cards.filter(function (c) { return set.cardIds.indexOf(c.id) > -1; }) : p.cards;
     cards = cards.filter(function (c) { return has(buildConfig(c).heading) || (buildConfig(c).names || []).length; });
     if (!cards.length) { toast("Add some invitation details first."); return; }
-    if (cards.length === 1) { copyLink(cardURL(cards[0])); return; }
+    if (cards.length === 1) { copyLink(await cardURL(cards[0])); return; }
     var configs = cards.map(function (c) { return { l: cardLabel(c), c: buildConfig(c) }; });
     var payload = { t: p.title || (GROUPS[p.type] || GROUPS.custom).label, lang: (configs[0] && configs[0].c.lang) || "en", items: configs };
-    copyLink(pageURL("group.html", "g", pack(payload)));
+    copyLink(pageURL("group.html", "g", await pack(payload)));
   }
 
   /* ============================ modal ============================ */
