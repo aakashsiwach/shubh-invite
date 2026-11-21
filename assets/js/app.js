@@ -475,7 +475,7 @@
       tick(); setInterval(tick, 1000);
     }
 
-    /* small status toast (used by RSVP) */
+    /* small status toast */
     var toast = $("#toast"), tt;
     function say(m) { toast.textContent = m; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove("show"); }, 2600); }
 
