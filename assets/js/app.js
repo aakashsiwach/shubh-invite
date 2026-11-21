@@ -220,6 +220,23 @@
     return '<div class="emblem" aria-hidden="true"><svg viewBox="-66 -66 132 132"><circle r="63"/><circle r="56" stroke-dasharray="1.5 5"/><g class="fill">' + dots + '</g><circle r="27" class="core"/></svg>' + inner + "</div>";
   }
 
+  function motifHTML(name) {
+    if (!name) return "";
+    var art = "";
+    if (name === "krishna") {
+      art = '<svg viewBox="0 0 360 240" role="presentation"><path class="feather-stem" d="M178 208Q160 110 210 26Q274 70 239 144Q219 183 178 208Z"/><path class="feather-eye" d="M205 66Q250 85 226 132Q205 158 184 137Q168 111 205 66Z"/><ellipse class="feather-core" cx="207" cy="111" rx="15" ry="25"/><path class="flute" d="M42 184L318 70"/><path class="flute-holes" d="M105 158l5 12m30-25 5 12m30-25 5 12m30-25 5 12m30-25 5 12"/></svg><span class="motif-caption">वृन्दावन · राधे कृष्ण</span>';
+    } else if (name === "radha") {
+      art = '<svg viewBox="0 0 360 240" role="presentation"><path class="lotus" d="M180 208Q104 154 142 105Q166 128 180 164Q194 128 218 105Q256 154 180 208Z"/><path class="lotus" d="M180 207Q58 181 91 125Q137 143 180 207Q223 143 269 125Q302 181 180 207Z"/><path class="feather-stem" d="M180 170Q165 78 210 20Q270 61 237 119Q218 151 180 170Z"/><ellipse class="feather-eye" cx="211" cy="82" rx="17" ry="29"/></svg><span class="motif-caption">बरसाना · राधा रानी</span>';
+    } else if (name === "shiv") {
+      art = '<svg viewBox="0 0 360 240" role="presentation"><path class="moon" d="M254 28A48 48 0 1 0 302 88A39 39 0 1 1 254 28Z"/><path class="mountain" d="M20 210L108 102L153 162L215 70L340 210Z"/><path class="trident" d="M180 204V36M180 74Q125 73 137 26Q151 48 180 50Q209 48 223 26Q235 73 180 74M153 204H207"/></svg><span class="motif-caption">कैलाश · हर हर महादेव</span>';
+    } else if (name === "ram-sita") {
+      art = '<svg viewBox="0 0 360 240" role="presentation"><circle class="sun-disc" cx="180" cy="98" r="72"/><path class="bow" d="M92 28Q210 105 92 204M92 28Q68 116 92 204"/><path class="arrow" d="M92 115L286 115M270 99L286 115L270 131"/></svg><span class="motif-caption">अयोध्या · सिया राम</span>';
+    } else if (name === "lakshmi" || name === "saraswati") {
+      art = '<svg viewBox="0 0 360 240" role="presentation"><path class="lotus" d="M180 205Q95 150 132 98Q161 120 180 162Q199 120 228 98Q265 150 180 205Z"/><path class="lotus" d="M180 202Q56 176 86 119Q135 138 180 202Q225 138 274 119Q304 176 180 202Z"/><circle class="sun-disc" cx="180" cy="91" r="48"/></svg><span class="motif-caption">शुभ मंगल · दिव्य आशीर्वाद</span>';
+    }
+    return art ? '<div class="divine-motif motif-' + esc(name) + '" aria-hidden="true">' + art + '</div>' : "";
+  }
+
   function namesHTML(names, joiner) {
     return names.map(function (n) { return '<span class="gold">' + esc(n) + "</span>"; })
       .join('<span class="joiner">' + esc(joiner) + "</span>");
@@ -231,7 +248,7 @@
     var whenLine = [c.dateText || (c.when ? fmtDate(c.when) : ""), c.timeText || (c.when ? fmtTime(c.when) : ""), c.place].filter(has).join(" · ");
 
     /* HERO */
-    h += '<section class="hero" id="top">' + (c.bgfx === "off" ? "" : '<div class="hero-fx" aria-hidden="true"></div>') + decorHTML(c.decor) + '<div class="hero-inner">';
+    h += '<section class="hero" id="top">' + (c.bgfx === "off" ? "" : '<div class="hero-fx" aria-hidden="true"></div>') + motifHTML(c.motif) + decorHTML(c.decor) + '<div class="hero-inner">';
     h += c.cover
       ? '<figure class="cover rise r1"><img src="' + esc(c.cover) + '" alt="' + esc(c.names.join(" and ")) + '"></figure>'
       : '<div class="rise r1">' + emblemHTML(c.emblem) + "</div>";
@@ -573,6 +590,7 @@
     var palette = (typeof cfg.palette === "object" && cfg.palette) ? Object.assign({}, PALETTES[typeDef.palette], cfg.palette)
       : PALETTES[cfg.palette] || PALETTES[typeDef.palette] || PALETTES.maroon;
     applyPalette(palette, cfg.style || typeDef.style);
+    if (cfg.motif) document.body.classList.add("motif-page", "motif-page-" + String(cfg.motif).replace(/[^a-z0-9-]/gi, ""));
     if (isLightColor(palette.bg)) document.body.classList.add("mode-light");
     document.body.classList.add("density-" + (cfg.density === "comfortable" ? "comfortable" : "compact"));
     var entrance = /^(rise|zoom|fade|slide|flip|drop|blur|pop|pan|tilt)$/.test(cfg.entrance || "") ? cfg.entrance : (typeDef.entrance || "rise");
