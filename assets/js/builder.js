@@ -588,8 +588,8 @@
     $("#ptitle").addEventListener("input", function (e) { p.title = e.target.value; save(); });
     $("#addsub").addEventListener("click", openSubChooser);
     $("#shareall").addEventListener("click", function () { shareSet(null); });
-    $("#openfull").addEventListener("click", function () { var c = currentCard(); if (c) window.open(cardURL(c), "_blank", "noopener"); });
-    $("#copyone").addEventListener("click", function () { var c = currentCard(); if (c) copyLink(cardURL(c)); });
+    $("#openfull").addEventListener("click", async function () { var c = currentCard(); if (c) window.open(await cardURL(c), "_blank", "noopener"); });
+    $("#copyone").addEventListener("click", async function () { var c = currentCard(); if (c) copyLink(await cardURL(c)); });
 
     renderRail();
     renderForm();
