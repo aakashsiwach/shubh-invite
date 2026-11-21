@@ -227,3 +227,7 @@ Made with ❤️ for Indian celebrations. Free to use under the [MIT License](LI
 ### Shorter invitation links
 
 New website and grouped invitation links are compressed in the browser using DEFLATE before being placed in the URL fragment. The invitation remains self-contained, so GitHub Pages does not need a database or link-shortening service. Existing uncompressed links continue to open. The actual length reduction depends on how much text, event detail and media metadata the invitation contains; images themselves are not embedded by the builder.
+
+### Devotional and animated designs
+
+The template catalogue includes original devotional wedding and puja themes such as Radha Krishna, Radha Rani, Shiv Parvati / Shiv Shakti, Sita Ram, Lakshmi and Saraswati. These themes use their own illustrated SVG hero motifs, theme-specific colour treatments, animated lotus ornaments, peacock-feather particles, glowing embers, and entrance transitions. Motion respects the device's reduced-motion accessibility setting.
