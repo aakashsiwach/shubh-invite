@@ -615,7 +615,23 @@
     return;
   }
 
-  var ex = new URLSearchParams(location.search).get("example");
+  var params = new URLSearchParams(location.search);
+  var templateId = params.get("template");
+  if (templateId && Array.isArray(window.SHUBH_TEMPLATES)) {
+    var selectedTemplate = window.SHUBH_TEMPLATES.find(function (t) { return t.id === templateId; });
+    if (selectedTemplate) {
+      window.INVITE = Object.assign({}, selectedTemplate.config, {
+        names: selectedTemplate.category === "wedding" || selectedTemplate.category === "engagement" ? ["Your Name", "Partner Name"] : ["Your Family"],
+        heading: selectedTemplate.name,
+        date: "Add your date and time",
+        place: "Add your venue",
+        gate: { title: "You are warmly invited" }
+      });
+      try { start(); } catch (err) { console.error(err); showProblem("This template could not be opened."); }
+      return;
+    }
+  }
+  var ex = params.get("example");
   var src = ex && /^[a-z0-9-]+$/.test(ex) ? "examples/" + ex + ".js" : "config.js";
   loadScript(src).then(start, function () {
     showProblem("Couldn't find <code>" + esc(src) + "</code>. Make sure it's next to <code>index.html</code>.");
