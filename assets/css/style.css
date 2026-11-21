@@ -520,3 +520,59 @@ code { background: rgba(0,0,0,.08); padding: 2px 6px; border-radius: 6px; font-s
   .rise, .reveal { opacity: 1; transform: none; filter: none; }
   #fx, .hero-fx { display: none; }
 }
+
+
+/* ---------------- DEVOTIONAL MOTIFS & CINEMATIC MOTION ---------------- */
+.divine-motif {
+  position: absolute; z-index: 1; left: 50%; top: 50%;
+  width: min(560px, 94vw); height: min(360px, 48vh);
+  transform: translate(-50%, -50%); pointer-events: none; opacity: .72;
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--accent) 35%, transparent));
+  animation: divineFloat 7s ease-in-out infinite;
+}
+.divine-motif svg { width: 100%; height: 100%; overflow: visible; }
+.divine-motif path, .divine-motif circle, .divine-motif ellipse {
+  vector-effect: non-scaling-stroke;
+}
+.divine-motif .feather-stem { fill: rgba(27,145,128,.16); stroke: #55C7A8; stroke-width: 3; }
+.divine-motif .feather-eye { fill: #167C9B; stroke: #80D8BE; stroke-width: 3; }
+.divine-motif .feather-core { fill: #D9B85B; stroke: #FFF0B2; stroke-width: 2; }
+.divine-motif .flute { fill: none; stroke: #E9BD68; stroke-width: 9; stroke-linecap: round; filter: drop-shadow(0 0 8px #E9BD68); }
+.divine-motif .flute-holes { fill: none; stroke: #633B21; stroke-width: 4; stroke-linecap: round; }
+.divine-motif .lotus { fill: rgba(238,155,185,.16); stroke: #F0B5CC; stroke-width: 2.5; }
+.divine-motif .moon { fill: #E9D8A4; filter: drop-shadow(0 0 14px #F9E6AE); }
+.divine-motif .mountain { fill: rgba(91,139,176,.18); stroke: #9BBAD5; stroke-width: 2; }
+.divine-motif .trident { fill: none; stroke: #DAB76A; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px #DAB76A); }
+.divine-motif .sun-disc { fill: rgba(226,180,96,.12); stroke: #E7C77C; stroke-width: 2; }
+.divine-motif .bow, .divine-motif .arrow { fill: none; stroke: #E7C77C; stroke-width: 5; stroke-linecap: round; }
+.motif-caption {
+  position: absolute; bottom: 3%; left: 0; right: 0; text-align: center;
+  color: var(--accent-soft); font-family: var(--deva); font-size: clamp(13px, 2vw, 19px);
+  letter-spacing: .18em; text-shadow: 0 2px 14px var(--bg-deep); opacity: .88;
+}
+.motif-page .hero-inner { text-shadow: 0 3px 22px rgba(0,0,0,.42); }
+.motif-page .hero-inner .emblem { transform: scale(1.12); }
+.motif-page-krishna .hero { background-image: radial-gradient(ellipse at 50% 42%, #244B83 0%, #101D42 48%, #071126 100%); }
+.motif-page-radha .hero { background-image: radial-gradient(ellipse at 50% 42%, #85415F 0%, #481D3A 50%, #210F28 100%); }
+.motif-page-shiv .hero { background-image: radial-gradient(ellipse at 50% 42%, #334B75 0%, #17233F 48%, #090F20 100%); }
+.motif-page-ram-sita .hero { background-image: radial-gradient(ellipse at 50% 42%, #9B4A20 0%, #5A1F12 50%, #260D0A 100%); }
+.motif-page-lakshmi .hero, .motif-page-saraswati .hero { background-image: radial-gradient(ellipse at 50% 42%, #82602B 0%, #433018 50%, #1C140D 100%); }
+.motif-page-krishna .divine-motif { animation-duration: 8s; }
+.motif-page-krishna .divine-motif .feather-eye { animation: featherPulse 3.6s ease-in-out infinite; transform-origin: center; }
+.motif-page-krishna .divine-motif .flute { animation: fluteGlow 2.8s ease-in-out infinite alternate; }
+.motif-page-shiv .divine-motif .moon { animation: moonGlow 4s ease-in-out infinite; transform-origin: center; }
+.motif-page-shiv .divine-motif .trident { animation: tridentGlow 3.2s ease-in-out infinite; }
+.motif-page-radha .divine-motif .lotus { animation: lotusBloom 5s ease-in-out infinite alternate; transform-origin: center; }
+@keyframes divineFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -13px; } }
+@keyframes featherPulse { 0%,100% { opacity: .72; filter: drop-shadow(0 0 2px #65D6C1); } 50% { opacity: 1; filter: drop-shadow(0 0 18px #65D6C1); } }
+@keyframes fluteGlow { from { filter: drop-shadow(0 0 3px #E9BD68); } to { filter: drop-shadow(0 0 16px #FFE6A5); } }
+@keyframes moonGlow { 0%,100% { filter: drop-shadow(0 0 5px #F4D98F); opacity: .75; } 50% { filter: drop-shadow(0 0 24px #FFF0B2); opacity: 1; } }
+@keyframes tridentGlow { 0%,100% { filter: drop-shadow(0 0 3px #DAB76A); } 50% { filter: drop-shadow(0 0 18px #F4D88B); } }
+@keyframes lotusBloom { from { opacity: .55; } to { opacity: 1; } }
+@media (max-width: 600px) {
+  .divine-motif { top: 46%; width: 100vw; height: 34vh; opacity: .58; }
+  .motif-caption { bottom: 0; letter-spacing: .08em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .divine-motif, .divine-motif * { animation: none !important; }
+}
