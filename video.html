@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Create an invitation video · Shubh Nimantran</title>
+  <meta name="description" content="Customize an original animated Indian invitation video and export it from your browser.">
+  <meta name="theme-color" content="#3D0A10">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/video.css">
+</head>
+<body>
+  <header class="video-head"><a href="index.html">← Template gallery</a><span>SHUBH NIMANTRAN</span><a href="builder.html">Website builder ↗</a></header>
+  <main class="video-layout">
+    <section class="editor">
+      <p class="eyebrow">ANIMATED INVITATION STUDIO</p>
+      <h1>Make it a moment.</h1>
+      <p class="intro">Personalize this original design and export a vertical invitation video. Everything is rendered locally in your browser.</p>
+      <form id="video-form">
+        <label>Template<select id="template"></select></label>
+        <label>Names / family<input id="names" maxlength="80" value="Aarav & Ananya"></label>
+        <label>Invitation heading<input id="heading" maxlength="90" value="Shubh Vivah"></label>
+        <label>Date & time<input id="date" maxlength="80" value="Sunday · 14 February 2027 · 7 PM"></label>
+        <label>Venue<input id="venue" maxlength="100" value="The Royal Palace · Jaipur"></label>
+        <label>Personal message<textarea id="message" rows="3" maxlength="180">Together with our families, we invite you to celebrate this special day.</textarea></label>
+        <div class="actions"><button type="button" class="secondary" id="reset">Reset sample</button><button type="submit" class="primary" id="export">Export video · 12 sec</button></div>
+      </form>
+      <p class="notice" id="status" role="status" aria-live="polite">Preview updates as you type. Export format depends on browser support (MP4 where supported, otherwise WebM).</p>
+      <p class="fine">Tip: Chrome and Edge desktop generally support browser-based recording. Video export requires a secure browser context (HTTPS or localhost).</p>
+    </section>
+    <section class="preview">
+      <div class="preview-top"><span>LIVE PREVIEW</span><span>9:16 · PORTRAIT</span></div>
+      <div class="canvas-frame"><canvas id="invitation" width="720" height="1280" aria-label="Animated invitation preview"></canvas></div>
+      <p class="preview-caption">Original design · No external design assets required</p>
+    </section>
+  </main>
+  <script src="assets/js/template-catalog.js"></script>
+  <script src="assets/js/video.js"></script>
+</body>
+</html>
