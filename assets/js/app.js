@@ -180,6 +180,10 @@
         '<g class="fl-bloom">' + rosette(32, 30, 15) + rosette(58, 20, 11) + rosette(20, 56, 11) + '</g></svg>';
       out += '<div class="florals" aria-hidden="true"><span class="fl f-tl">' + fl + '</span><span class="fl f-tr">' + fl + '</span><span class="fl f-bl">' + fl + '</span><span class="fl f-br">' + fl + "</span></div>";
     }
+    if (list.indexOf("lotus") > -1) {
+      var lotus = '<svg viewBox="0 0 220 120"><path d="M110 108Q48 78 78 24Q101 38 110 78Q119 38 142 24Q172 78 110 108Z"/><path d="M110 108Q8 94 34 48Q74 58 110 108Q146 58 186 48Q212 94 110 108Z"/><path d="M110 108Q80 74 110 42Q140 74 110 108Z"/></svg>';
+      out += '<div class="lotus-decor" aria-hidden="true"><span>' + lotus + '</span><span>' + lotus + '</span><span>' + lotus + '</span></div>';
+    }
     if (list.indexOf("toran") > -1) {
       var s = "";
       for (var i = 0; i < 15; i++) s += '<span class="strand' + (i % 2 ? " alt" : "") + '" style="height:' + [110, 80, 128, 96, 116][i % 5] + 'px;animation-delay:' + (-i * 0.35).toFixed(2) + 's"></span>';
