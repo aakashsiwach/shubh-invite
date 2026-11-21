@@ -54,3 +54,28 @@ test("shared invitation payloads round-trip Unicode through base64url", () => {
   const decoded = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8"));
   assert.deepEqual(decoded, payload);
 });
+
+test("original template catalogue contains 100 valid occasion presets", () => {
+  const context = { window: {} };
+  vm.runInNewContext(read("assets/js/template-catalog.js"), context, { filename: "template-catalog.js" });
+  const catalogue = context.window.SHUBH_TEMPLATES;
+  assert.equal(catalogue.length, 100);
+  assert.equal(new Set(catalogue.map((item) => item.id)).size, 100);
+  for (const item of catalogue) {
+    assert.ok(item.name && item.category && item.config);
+    assert.ok(["wedding", "engagement", "anniversary", "birthday", "babyshower", "housewarming", "puja", "party"].includes(item.type));
+    assert.ok(item.config.palette && Array.isArray(item.config.effects) && Array.isArray(item.config.decor));
+  }
+  const categories = new Set(catalogue.map((item) => item.category));
+  for (const category of ["wedding", "engagement", "anniversary", "birthday", "baby", "house", "puja", "festival", "party"]) {
+    assert.ok(categories.has(category), `Missing template category: ${category}`);
+  }
+});
+
+test("both website and video creation entry points are published", () => {
+  assert.match(read("index.html"), /href="builder.html"/);
+  assert.match(read("index.html"), /href="video.html"/);
+  assert.match(read("invite.html"), /template-catalog\.js/);
+  assert.match(read("builder.html"), /template-catalog\.js/);
+  assert.match(read("video.html"), /assets\/js\/video\.js/);
+});
