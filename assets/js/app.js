@@ -643,4 +643,5 @@
     console.error(err);
     showProblem("Something went wrong while building the page: " + esc(err.message));
   });
+  })();
 })();
