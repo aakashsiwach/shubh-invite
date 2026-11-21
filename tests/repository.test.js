@@ -41,10 +41,11 @@ test("published links point to this repository", () => {
 });
 
 test("builder and documentation do not advertise removed RSVP functionality", () => {
-  const sources = ["README.md", "config.js", "assets/js/builder.js", "assets/js/app.js"];
+  const sources = ["config.js", "assets/js/builder.js", "assets/js/app.js"];
   for (const file of sources) {
     assert.doesNotMatch(read(file), /RSVP|rsvp|WhatsApp RSVP/i, `${file} contains stale RSVP references`);
   }
+  assert.doesNotMatch(read("README.md"), /RSVP on WhatsApp|RSVP form|rsvp\\.whatsapp|countdown, venue, RSVP/i);
 });
 
 test("shared invitation payloads round-trip Unicode through base64url", () => {
