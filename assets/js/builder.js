@@ -181,7 +181,13 @@
     { id: "botanical", label: "Botanical",     palette: "emerald", style: "elegant", effects: ["petals"],             decor: ["florals", "mandala"],                   emblem: "leaf" },
     { id: "royal",     label: "Royal",         palette: "royal",   style: "elegant", effects: ["sparkles"],           decor: ["arch", "mandala", "bells"],             emblem: "glass" }
   ];
-  function templatesFor(sub) { return UNIVERSAL.concat(TEMPLATES[SUBS[sub].family] || TEMPLATES.couple); }
+  function templatesFor(sub) {
+    var type = SUBS[sub].type;
+    var originals = (window.SHUBH_TEMPLATES || []).filter(function (t) { return t.type === type; }).map(function (t) {
+      return { id: "catalog-" + t.id, label: t.name, palette: t.config.palette, style: t.config.style, effects: t.config.effects, decor: t.config.decor, emblem: t.config.emblem };
+    });
+    return UNIVERSAL.concat(TEMPLATES[SUBS[sub].family] || TEMPLATES.couple, originals);
+  }
   function findTemplate(sub, id) {
     var list = templatesFor(sub);
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
