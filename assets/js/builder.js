@@ -231,7 +231,7 @@
       { k: "compliments", label: "With compliments", type: "text", placeholder: "Sharma & Mehta Families" }
     ] },
     { title: "Design & layout", fields: [
-      { k: "lang", label: "Language", type: "select", opts: ["English", "हिन्दी (Hindi)"], help: "Language of the fixed text (countdown, RSVP, buttons…). Guests can switch with one tap." },
+      { k: "lang", label: "Language", type: "select", opts: ["English", "हिन्दी (Hindi)"], help: "Language of the fixed text (countdown, venue, calendar and buttons). Guests can switch with one tap." },
       { k: "bg", label: "Background", type: "select", opts: ["Keep theme", "Light cream & gold", "Rich (dark)"], help: "Light = a cream/ivory Canva-style look." },
       { k: "emblem", label: "Symbol (shown when there's no cover photo)", type: "select", opts: ["Keep theme", "Ganesha", "Om (ॐ)", "Diya", "Ring", "Kalash", "Heart", "Star"] },
       { k: "arch", label: "Arch frame", type: "select", opts: ["No arch", "Temple arch"], help: "A decorative mehrab arch framing the opening." },
