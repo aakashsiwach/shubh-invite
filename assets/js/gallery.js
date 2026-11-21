@@ -23,6 +23,10 @@
     { type: "puja",         label: "Puja · Katha",       cat: "home" },
     { type: "party",        label: "Party",              cat: "party" }
   ];
+  (window.SHUBH_TEMPLATES || []).forEach(function (t) {
+    var cat = ({ wedding: "family", engagement: "family", anniversary: "family", birthday: "kids", baby: "kids", house: "home", puja: "home", festival: "home", party: "party" })[t.category] || "family";
+    DESIGNS.push({ id: t.id, type: t.type, label: t.name, cat: cat, catalog: true, config: t.config });
+  });
   var FX_WORDS = { petals: "falling petals", confetti: "confetti", balloons: "balloons", hearts: "hearts", sparkles: "sparkles", bubbles: "bubbles" };
   var DECOR_WORDS = { toran: "toran", bunting: "bunting", bells: "temple bells", mandala: "mandala", diyas: "diyas", arch: "temple arch", florals: "floral corners" };
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -130,8 +134,12 @@
     var html = "";
     for (var i = 0; i < DESIGNS.length; i++) {
       window.INVITE = null;
-      await loadScript("examples/" + (DESIGNS[i].id || DESIGNS[i].type) + ".js");
-      html += card(DESIGNS[i], window.INVITE || {});
+      if (DESIGNS[i].catalog) {
+        html += card(DESIGNS[i], DESIGNS[i].config);
+      } else {
+        await loadScript("examples/" + (DESIGNS[i].id || DESIGNS[i].type) + ".js");
+        html += card(DESIGNS[i], window.INVITE || {});
+      }
     }
     var grid = document.getElementById("grid");
     grid.innerHTML = html;
