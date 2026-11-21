@@ -591,7 +591,7 @@
 
   /* Decode an invitation packed into the link (#i=… made by the builder).
      base64url( JSON ) — no server needed, the link carries everything. */
-  function decodePacked() {
+  async function decodePacked() {
     var m = /[#&]i=([^&]+)/.exec(location.hash || "");
     if (!m) return null;
     try {
@@ -607,7 +607,7 @@
     if (e && e.filename && /config\.js|examples\//.test(e.filename)) problem = e.message + " (line " + e.lineno + ")";
   });
 
-  var packed = decodePacked();
+  (async function () {\n  var packed = await decodePacked();
   if (packed) {
     window.INVITE = packed;
     try { start(); }
