@@ -13,6 +13,24 @@ Edit one file, drop your photos into a folder, and your invitation is online wit
   <img src="docs/birthday.jpg" width="230" alt="Birthday invitation">
 </p>
 
+## 🛠️ Build it in your browser (no code) — `builder.html`
+
+Open **`builder.html`** (linked from the home page as **“Create your invitation”**) to make an invitation **without touching `config.js`**:
+
+1. **Set a local PIN** (phone/email + PIN). Your drafts are saved in *this browser*.
+2. **Pick an occasion** — Marriage, Birthday, Party, Pooja, Baby & Kids, Housewarming or Custom.
+3. **Add sub-invitations** to the set — e.g. Sagai, Haldi, Mehndi, Sangeet, Shaadi, Reception. Each gets its own design and form.
+4. **Fill the form** (headings, the two sides with parents & address, date, venue + map link, programme, phones, timings). Rows reorder with ▲▼, so the **position is yours to manage**. A **live preview** updates as you type.
+5. **Share a link:**
+   - **Copy this link** — shares the one invitation you're editing.
+   - **Who gets what** — make a *set* (only Sagai · Sagai + Shaadi · all) and copy one **grouped link** for those guests. It opens `group.html`, a chooser of just that set.
+
+Everything is packed **into the link itself** (`#i=…` / `#g=…`), so sharing needs **no server** — it still hosts free on GitHub Pages. (This is the free **Phase 1**. Personalised per-guest links and reminders are planned for Phase 2.)
+
+> Photos/music in the builder are added as **URLs** (paste a link to the image/MP3). The `photos/` and `music/` folders are used by the classic `config.js` flow below.
+
+---
+
 ## ✨ What you get
 
 - **11 invitation types:** Wedding, Engagement (Sagai), Reception, Anniversary, Birthday, Griha Pravesh, Godh Bharai, Naamkaran, Mundan, Puja / Katha, and Party
@@ -116,7 +134,25 @@ Set `type` in `config.js`. Each type sets its colours, animations, decorations a
 **Preview any type:** open the gallery (your main link) and tap a design, or go directly to `…/invite.html?example=birthday`. The sample files are in the [`examples`](examples) folder. Copy one into `config.js` to start from it.
 
 ### Change colours
-Set `palette` to one of: `maroon`, `rose`, `royal`, `emerald`, `saffron`, `blush`, `sky`, `party` or `night`.
+Set `palette` to one of: `maroon`, `rose`, `royal`, `emerald`, `saffron`, `blush`, `sky`, `party`, `night`, the energetic `sunset`, `fiesta`, `tropical`, `grape`, or the light cream/pastel `ivory` and `pearl`.
+
+### Design elements (Canva-style)
+The builder's **Design & layout** section (and these config keys) let you add:
+```js
+emblem: "ganesh",            // ganesh · om · diya · ring · kalash · heart · star
+decor:  ["arch", "florals"], // "arch" = temple/mehrab frame · "florals" = rose & leaf corners
+palette: "ivory",            // a light cream & gold background (or "pearl" for soft pastel)
+```
+Ready-made themes **Cream & Gold**, **Royal Arch**, **Pastel Minimal**, **Floral**, **Festive**, **Botanical** and **Royal** combine these into one-tap looks, available for every occasion so a whole set stays consistent.
+
+### Language, map link, calendar & compact layout
+```js
+lang:    "hi",          // "en" (English) or "hi" (Hindi) — translates the fixed text
+map:     "none",        // hide the "View location on Google Maps" link (default: shown)
+density: "comfortable", // more spacing (default is compact = less scrolling)
+```
+Pick **English or हिन्दी** in the builder (Design & layout). All the fixed text — countdown, venue, RSVP, calendar and buttons — switches language, and default headings/opening titles get Hindi versions. Every invitation also has a **one-tap language toggle** in the corner so guests can switch. Pages are **compact by default** to reduce scrolling.
+The venue section shows an eye-catching **map link** with a location pin that opens the venue in Google Maps — it uses the `venue.mapLink` you paste (which points to the exact place) or searches the venue name + address. The **Save the Date** block offers *Add to Google Calendar* and *Add to phone calendar* so guests can set a reminder.
 
 ### Change the animations
 ```js
@@ -138,6 +174,8 @@ Download the ZIP, unzip it, and **double-click `index.html`** (the gallery) or *
 
 ```
 index.html          ← home page: gallery of all designs
+builder.html        ← no-code builder: create invitation sets & share links
+group.html          ← opens a shared grouped link (a set of invitations)
 invite.html         ← your invitation (edit only the preview tags at the top)
 config.js           ← ✏️ YOUR DETAILS — edit this
 photos/cover.jpg    ← optional main photo
@@ -160,3 +198,5 @@ assets/             ← design & code (no need to touch)
 ---
 
 Made with ❤️ for Indian celebrations. Free to use under the [MIT License](LICENSE). Fonts from Google Fonts (Open Font License).
+
+**Credits:** the demo couple photo (`assets/couple-photo.jpg`) is from [Pexels](https://www.pexels.com/) under the free Pexels License (no attribution required) — it's only a placeholder; add your own photo via `photos/cover.jpg` or the builder's cover field. An alternate hand-drawn illustration is in `assets/couple.svg`.

@@ -8,6 +8,9 @@
   var ICON = window.INVITE_ICONS, TYPES = window.INVITE_TYPES, PALETTES = window.INVITE_PALETTES;
 
   var DESIGNS = [
+    { id: "red-pink",     type: "wedding", label: "Red & Pink Traditional", cat: "family" },
+    { id: "cream-wedding",type: "wedding", label: "Cream & Gold Arch",      cat: "family" },
+    { id: "royal-arch",   type: "wedding", label: "Royal Arch",             cat: "family" },
     { type: "wedding",      label: "Wedding",            cat: "family" },
     { type: "engagement",   label: "Engagement · Sagai", cat: "family" },
     { type: "reception",    label: "Wedding Reception",  cat: "family" },
@@ -21,7 +24,7 @@
     { type: "party",        label: "Party",              cat: "party" }
   ];
   var FX_WORDS = { petals: "falling petals", confetti: "confetti", balloons: "balloons", hearts: "hearts", sparkles: "sparkles", bubbles: "bubbles" };
-  var DECOR_WORDS = { toran: "toran", bunting: "bunting", bells: "temple bells", mandala: "mandala", diyas: "diyas" };
+  var DECOR_WORDS = { toran: "toran", bunting: "bunting", bells: "temple bells", mandala: "mandala", diyas: "diyas", arch: "temple arch", florals: "floral corners" };
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -48,6 +51,8 @@
 
   function miniDecor(decor) {
     var h = "";
+    if (decor.indexOf("arch") > -1) h += '<div class="m-arch"></div>';
+    if (decor.indexOf("florals") > -1) h += '<span class="m-floral tl"></span><span class="m-floral tr"></span><span class="m-floral bl"></span><span class="m-floral br"></span>';
     if (decor.indexOf("toran") > -1) {
       h += '<div class="m-toran">';
       for (var i = 0; i < 9; i++) h += '<span style="height:' + [30, 20, 36, 24, 32][i % 5] + 'px;animation-delay:' + (-i * 0.4) + 's"></span>';
@@ -86,7 +91,7 @@
     var decor = (cfg.decor || T.decor);
     var feats = fx.map(function (f) { return FX_WORDS[f]; }).concat(decor.map(function (x) { return DECOR_WORDS[x]; })).filter(Boolean);
     var vars = "--bg:" + P.bg + ";--bg-deep:" + P.bgDeep + ";--glow:" + P.glow + ";--accent:" + P.accent + ";--accent-soft:" + P.accentSoft + ";--text:" + P.text;
-    return '<a class="card reveal" data-cat="' + d.cat + '" href="invite.html?example=' + d.type + '" style="' + vars + '">' +
+    return '<a class="card reveal" data-cat="' + d.cat + '" href="invite.html?example=' + (d.id || d.type) + '" style="' + vars + '">' +
       '<div class="phone style-' + style + '" aria-hidden="true">' +
         miniDecor(decor) + miniFx(fx[0]) +
         '<div class="m-body">' +
@@ -125,7 +130,7 @@
     var html = "";
     for (var i = 0; i < DESIGNS.length; i++) {
       window.INVITE = null;
-      await loadScript("examples/" + DESIGNS[i].type + ".js");
+      await loadScript("examples/" + (DESIGNS[i].id || DESIGNS[i].type) + ".js");
       html += card(DESIGNS[i], window.INVITE || {});
     }
     var grid = document.getElementById("grid");

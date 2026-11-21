@@ -9,6 +9,50 @@
   var TYPES = window.INVITE_TYPES;
   var PALETTES = window.INVITE_PALETTES;
 
+  /* ---------- language (English / Hindi) ---------- */
+  var LANG = "en";
+  var I18N = {
+    en: {
+      countdownTitle: "Counting down the days", days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds",
+      celebrations: "The Celebrations", moments: "Moments", venue: "The Venue", saveDate: "Save the Date",
+      mapMain: "View location on Google Maps", mapSub: "Tap to open the map & get directions",
+      gcal: "Add to Google Calendar", pcal: "Add to phone calendar",
+      saveDateNote: "Save the date — add a reminder below so you don't miss it.",
+      rsvp: "RSVP", respondBy: "Kindly respond by ", yourName: "Your name", willAttend: "Will you attend?",
+      accept: "Joyfully accept", decline: "Regretfully decline", numGuests: "Number of guests",
+      messageOpt: "Message (optional)", sendRsvp: "Send RSVP on WhatsApp", compliments: "With best compliments",
+      allDesigns: "All designs", openInvitation: "Open Invitation", dear: "Dear ", withWord: "with",
+      waYes: "🙏 Namaste! We will be there.", waNo: "🙏 Namaste! Sorry, we won't be able to make it.",
+      waName: "Name: ", waGuests: "Guests: ", waMsg: "Message: ", thanksYes: "Thank you! Opening WhatsApp…",
+      thanksNo: "Thank you for letting us know.", needName: "Please enter your name.", toEnglish: "English", toHindi: "हिन्दी",
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      daysLong: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    },
+    hi: {
+      countdownTitle: "शुभ दिन की प्रतीक्षा", days: "दिन", hours: "घंटे", minutes: "मिनट", seconds: "सेकंड",
+      celebrations: "समारोह", moments: "कुछ पल", venue: "स्थान", saveDate: "तिथि सुरक्षित रखें",
+      mapMain: "गूगल मैप पर स्थान देखें", mapSub: "मैप खोलें और रास्ता पाएँ",
+      gcal: "गूगल कैलेंडर में जोड़ें", pcal: "फ़ोन कैलेंडर में जोड़ें",
+      saveDateNote: "तिथि सुरक्षित रखें — नीचे रिमाइंडर जोड़ें ताकि आप न भूलें।",
+      rsvp: "उपस्थिति सूचित करें", respondBy: "कृपया इस तिथि तक सूचित करें: ", yourName: "आपका नाम", willAttend: "क्या आप आएँगे?",
+      accept: "सहर्ष स्वीकार", decline: "क्षमा सहित अस्वीकार", numGuests: "मेहमानों की संख्या",
+      messageOpt: "संदेश (वैकल्पिक)", sendRsvp: "व्हाट्सऐप पर उत्तर भेजें", compliments: "सादर शुभकामनाओं सहित",
+      allDesigns: "सभी डिज़ाइन", openInvitation: "निमंत्रण खोलें", dear: "प्रिय ", withWord: "एवं",
+      waYes: "🙏 नमस्ते! हम अवश्य आएँगे।", waNo: "🙏 नमस्ते! क्षमा करें, हम नहीं आ पाएँगे।",
+      waName: "नाम: ", waGuests: "मेहमान: ", waMsg: "संदेश: ", thanksYes: "धन्यवाद! व्हाट्सऐप खुल रहा है…",
+      thanksNo: "सूचित करने के लिए धन्यवाद।", needName: "कृपया अपना नाम लिखें।", toEnglish: "English", toHindi: "हिन्दी",
+      months: ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"],
+      daysLong: ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"]
+    }
+  };
+  function T(k) { var d = I18N[LANG] || I18N.en; return d[k] != null ? d[k] : (I18N.en[k] != null ? I18N.en[k] : k); }
+  function isLightColor(hex) {
+    var c = String(hex || "").replace("#", "");
+    if (c.length !== 6) return false;
+    var r = parseInt(c.substr(0, 2), 16), g = parseInt(c.substr(2, 2), 16), b = parseInt(c.substr(4, 2), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 150;
+  }
+
   /* ---------- small helpers ---------- */
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -100,7 +144,9 @@
     return { y: y, mo: mo, d: d, hh: hh, mm: mm, hasTime: hasTime, ts: Date.UTC(y, mo - 1, d, hh, mm) - off * 60000 };
   }
   function fmtDate(w) {
-    return DAYS[new Date(Date.UTC(w.y, w.mo - 1, w.d)).getUTCDay()] + ", " + w.d + " " + MONTHS[w.mo - 1] + " " + w.y;
+    var days = (I18N[LANG] && I18N[LANG].daysLong) || DAYS;
+    var months = (I18N[LANG] && I18N[LANG].months) || MONTHS;
+    return days[new Date(Date.UTC(w.y, w.mo - 1, w.d)).getUTCDay()] + ", " + w.d + " " + months[w.mo - 1] + " " + w.y;
   }
   function fmtTime(w) {
     if (!w.hasTime) return "";
@@ -131,6 +177,21 @@
   /* ---------- decorations ---------- */
   function decorHTML(list) {
     var out = "";
+    if (list.indexOf("arch") > -1) {
+      out += '<div class="arch" aria-hidden="true"></div>';
+    }
+    if (list.indexOf("florals") > -1) {
+      function rosette(cx, cy, r) {
+        var s = "";
+        for (var i = 0; i < 6; i++) s += '<ellipse cx="' + cx + '" cy="' + (cy - r * 0.55).toFixed(1) + '" rx="' + (r * 0.42).toFixed(1) + '" ry="' + (r * 0.62).toFixed(1) + '" transform="rotate(' + i * 60 + " " + cx + " " + cy + ')"/>';
+        return '<g class="petal">' + s + '</g><circle class="pcore" cx="' + cx + '" cy="' + cy + '" r="' + (r * 0.34).toFixed(1) + '"/>';
+      }
+      var fl = '<svg viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet">' +
+        '<g class="fl-stem"><path d="M6 114C20 84 22 62 18 40"/><path d="M18 72C32 68 42 56 46 42"/><path d="M14 92C28 90 38 82 44 70"/></g>' +
+        '<g class="fl-leaf"><path d="M18 72c10-2 18-10 22-22-12 2-20 10-22 22z"/><path d="M14 92c10-2 18-10 22-22-12 2-20 10-22 22z"/></g>' +
+        '<g class="fl-bloom">' + rosette(32, 30, 15) + rosette(58, 20, 11) + rosette(20, 56, 11) + '</g></svg>';
+      out += '<div class="florals" aria-hidden="true"><span class="fl f-tl">' + fl + '</span><span class="fl f-tr">' + fl + '</span><span class="fl f-bl">' + fl + '</span><span class="fl f-br">' + fl + "</span></div>";
+    }
     if (list.indexOf("toran") > -1) {
       var s = "";
       for (var i = 0; i < 15; i++) s += '<span class="strand' + (i % 2 ? " alt" : "") + '" style="height:' + [110, 80, 128, 96, 116][i % 5] + 'px;animation-delay:' + (-i * 0.35).toFixed(2) + 's"></span>';
@@ -182,7 +243,7 @@
     var whenLine = [c.dateText || (c.when ? fmtDate(c.when) : ""), c.timeText || (c.when ? fmtTime(c.when) : ""), c.place].filter(has).join(" · ");
 
     /* HERO */
-    h += '<section class="hero" id="top">' + decorHTML(c.decor) + '<div class="hero-inner">';
+    h += '<section class="hero" id="top">' + (c.bgfx === "off" ? "" : '<div class="hero-fx" aria-hidden="true"></div>') + decorHTML(c.decor) + '<div class="hero-inner">';
     h += c.cover
       ? '<figure class="cover rise r1"><img src="' + esc(c.cover) + '" alt="' + esc(c.names.join(" and ")) + '"></figure>'
       : '<div class="rise r1">' + emblemHTML(c.emblem) + "</div>";
@@ -197,9 +258,9 @@
 
     /* COUNTDOWN */
     if (c.when && c.when.ts > Date.now() && c.countdown !== false) {
-      h += '<section class="countdown band"><div class="wrap center"><p class="eyebrow">' + esc(c.countdownTitle || "Counting down the days") + '</p><div class="cd-grid">' +
+      h += '<section class="countdown band"><div class="wrap center"><p class="eyebrow">' + esc(c.countdownTitle || T("countdownTitle")) + '</p><div class="cd-grid">' +
         ["days", "hours", "minutes", "seconds"].map(function (u) {
-          return '<div class="cd-box"><span class="cd-num" data-cd="' + u + '">–</span><span class="cd-lbl">' + u.charAt(0).toUpperCase() + u.slice(1) + "</span></div>";
+          return '<div class="cd-box"><span class="cd-num" data-cd="' + u + '">–</span><span class="cd-lbl">' + esc(T(u)) + "</span></div>";
         }).join("") + "</div></div></section>";
     }
 
@@ -212,15 +273,36 @@
       if (has(inv.message)) h += '<p class="lead">' + txt(inv.message) + "</p>";
       if (inv.repeatNames !== false && c.names.length) {
         h += c.names.map(function (n) { return '<p class="script-name">' + esc(n) + "</p>"; })
-          .join('<p class="with">' + esc(inv.joinWord || "with") + "</p>");
+          .join('<p class="with">' + esc(inv.joinWord || T("withWord")) + "</p>");
       }
       if (has(inv.after)) h += '<p class="lead em">' + txt(inv.after) + "</p>";
       h += "</div></section>";
     }
 
+    /* FAMILIES / PARTIES (groom & bride sides, parents, address) */
+    if (c.parties && c.parties.length) {
+      h += '<section class="section paper alt"><div class="wrap">';
+      if (has(c.partiesTitle)) h += '<h2 class="title center reveal">' + esc(c.partiesTitle) + "</h2>";
+      h += '<div class="parties">';
+      c.parties.forEach(function (p, i) {
+        if (!p || !has(p.name)) return;
+        h += '<article class="party reveal" style="transition-delay:' + (i % 2) * 0.1 + 's">';
+        if (has(p.role)) h += '<p class="party-role">' + esc(p.role) + "</p>";
+        h += '<p class="party-name">' + esc(p.name) + "</p>";
+        if (has(p.parents)) h += '<p class="party-parents">' + esc(p.lineage || "child of") + " " + txt(p.parents) + "</p>";
+        if (has(p.address)) h += '<p class="party-addr">' + txt(p.address) + "</p>";
+        if (has(p.phone)) {
+          var ptel = String(p.phone).replace(/[^\d+]/g, "");
+          h += '<a class="link" href="tel:' + esc(ptel) + '">' + ICON("phone") + esc(p.phone) + "</a>";
+        }
+        h += "</article>";
+      });
+      h += "</div></div></section>";
+    }
+
     /* EVENTS */
     if (c.events.length) {
-      h += '<section class="section paper alt"><div class="wrap"><h2 class="title center reveal">' + esc(c.eventsTitle || "The Celebrations") + "</h2>";
+      h += '<section class="section paper alt"><div class="wrap"><h2 class="title center reveal">' + esc(c.eventsTitle || T("celebrations")) + "</h2>";
       if (has(c.eventsSubtitle)) h += '<p class="sub center reveal">' + txt(c.eventsSubtitle) + "</p>";
       h += '<div class="events">';
       c.events.forEach(function (ev, i) {
@@ -238,7 +320,7 @@
 
     /* GALLERY */
     if (c.gallery.length) {
-      h += '<section class="section dark"><div class="wrap"><h2 class="title center reveal">' + esc(c.galleryTitle || "Moments") + '</h2><div class="gallery">';
+      h += '<section class="section dark"><div class="wrap"><h2 class="title center reveal">' + esc(c.galleryTitle || T("moments")) + '</h2><div class="gallery">';
       c.gallery.forEach(function (src, i) {
         h += '<button class="g-item reveal" type="button" data-i="' + i + '" aria-label="Open photo ' + (i + 1) + '"><img src="' + esc(src) + '" alt="" loading="lazy"></button>';
       });
@@ -248,46 +330,52 @@
     /* VENUE + CALENDAR + SHARE */
     var v = c.venue || {};
     var actions = "";
-    if (has(v.name) || has(v.address)) {
-      var map = has(v.mapLink) ? safeUrl(v.mapLink) : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([v.name, v.address].filter(has).join(", "));
-      actions += '<a class="btn solid" href="' + esc(map) + '" target="_blank" rel="noopener">' + ICON("pin") + "Get directions</a>";
-    }
     if (c.when) {
       var cal = calendarLinks(c, c.when, c.pageTitle, [v.name, v.address].filter(has).join(", "));
-      actions += '<a class="btn" href="' + esc(cal.google) + '" target="_blank" rel="noopener">' + ICON("calendar") + "Google Calendar</a>";
-      actions += '<a class="btn" href="' + cal.ics + '" download="invitation.ics">' + ICON("calendar") + "Save to phone calendar</a>";
+      actions += '<a class="btn solid" href="' + esc(cal.google) + '" target="_blank" rel="noopener">' + ICON("calendar") + esc(T("gcal")) + "</a>";
+      actions += '<a class="btn" href="' + cal.ics + '" download="invitation.ics">' + ICON("calendar") + esc(T("pcal")) + "</a>";
     }
-    actions += '<button class="btn" type="button" id="share-btn">' + ICON("share") + "Share invitation</button>";
     h += '<section class="section dark venue"><div class="wrap narrow center reveal">';
     if (has(v.name) || has(v.address)) {
-      h += '<h2 class="title">' + esc(v.title || "The Venue") + "</h2>";
+      h += '<h2 class="title">' + esc(v.title || T("venue")) + "</h2>";
       if (has(v.name)) h += '<p class="venue-name">' + txt(v.name) + "</p>";
       if (has(v.address)) h += '<p class="venue-addr">' + txt(v.address) + "</p>";
     } else {
-      h += '<h2 class="title">' + esc("Save the Date") + "</h2>";
+      h += '<h2 class="title">' + esc(T("saveDate")) + "</h2>";
       if (has(whenLine)) h += '<p class="venue-name">' + esc(whenLine) + "</p>";
     }
+    /* eye-catching "open in Maps" link (opens the exact pasted location,
+       or searches the venue name + address). */
+    if (c.map !== "none" && (has(v.name) || has(v.address) || has(v.mapLink))) {
+      var dir = has(v.mapLink) ? safeUrl(v.mapLink) : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([v.name, v.address].filter(has).join(", "));
+      h += '<a class="map-link" href="' + esc(dir) + '" target="_blank" rel="noopener">' +
+        '<span class="map-pin">' + ICON("pin") + "</span>" +
+        '<span class="map-txt"><span class="map-main">' + esc(T("mapMain")) + "</span>" +
+        '<span class="map-sub">' + esc([v.name, v.address].filter(has).join(" · ") || T("mapSub")) + "</span></span>" +
+        '<span class="map-go">' + ICON("right") + "</span></a>";
+    }
+    if (c.when) h += '<p class="save-date">' + esc(T("saveDateNote")) + "</p>";
     h += '<div class="actions">' + actions + "</div></div></section>";
 
     /* RSVP */
     var r = c.rsvp || {};
     if (has(r.whatsapp)) {
-      h += '<section class="section paper"><div class="wrap form-wrap reveal"><h2 class="title center">' + esc(r.title || "RSVP") + "</h2>";
-      if (has(r.by)) h += '<p class="sub center">Kindly respond by ' + esc(r.by) + "</p>";
+      h += '<section class="section paper"><div class="wrap form-wrap reveal"><h2 class="title center">' + esc(r.title || T("rsvp")) + "</h2>";
+      if (has(r.by)) h += '<p class="sub center">' + esc(T("respondBy")) + esc(r.by) + "</p>";
       h += '<form id="rsvp" class="rsvp" novalidate>' +
-        '<label for="r-name">Your name</label><input id="r-name" name="name" type="text" autocomplete="name" required value="' + esc(c.guest || "") + '">' +
-        '<label for="r-att">Will you attend?</label><select id="r-att" name="att"><option value="yes">Joyfully accept</option><option value="no">Regretfully decline</option></select>' +
-        '<label for="r-num">Number of guests</label><input id="r-num" name="num" type="number" min="1" max="50" value="2" inputmode="numeric">' +
-        '<label for="r-msg">Message (optional)</label><textarea id="r-msg" name="msg" rows="3"></textarea>' +
+        '<label for="r-name">' + esc(T("yourName")) + '</label><input id="r-name" name="name" type="text" autocomplete="name" required value="' + esc(c.guest || "") + '">' +
+        '<label for="r-att">' + esc(T("willAttend")) + '</label><select id="r-att" name="att"><option value="yes">' + esc(T("accept")) + '</option><option value="no">' + esc(T("decline")) + "</option></select>" +
+        '<label for="r-num">' + esc(T("numGuests")) + '</label><input id="r-num" name="num" type="number" min="1" max="50" value="2" inputmode="numeric">' +
+        '<label for="r-msg">' + esc(T("messageOpt")) + '</label><textarea id="r-msg" name="msg" rows="3"></textarea>' +
         '<p class="form-err" id="r-err" role="alert"></p>' +
-        '<button class="btn solid wide" type="submit">' + ICON("chat") + "Send RSVP on WhatsApp</button></form></div></section>";
+        '<button class="btn solid wide" type="submit">' + ICON("chat") + esc(T("sendRsvp")) + "</button></form></div></section>";
     }
 
     /* FOOTER */
     h += '<footer class="footer"><div class="wrap narrow center">';
     if (has(c.footerTop)) h += '<p class="top-line small">' + txt(c.footerTop) + "</p>";
     if (has(c.footer)) h += '<p class="footer-msg">' + txt(c.footer) + "</p>";
-    if (has(c.compliments)) h += '<p class="footer-block"><span class="eyebrow">With best compliments</span><br>' + txt(c.compliments) + "</p>";
+    if (has(c.compliments)) h += '<p class="footer-block"><span class="eyebrow">' + esc(T("compliments")) + '</span><br>' + txt(c.compliments) + "</p>";
     if (c.contacts.length) {
       h += '<div class="contacts">' + c.contacts.map(function (p) {
         var tel = String(p.phone || "").replace(/[^\d+]/g, "");
@@ -306,7 +394,8 @@
         '<button class="lb-btn lb-next" type="button" aria-label="Next photo">' + ICON("right") + "</button></div>";
     }
     h += '<div class="toast" id="toast" role="status" aria-live="polite"></div>';
-    if (ex) h += '<a class="back-btn" href="index.html">' + ICON("left") + "All designs</a>";
+    h += '<button class="lang-btn" id="lang-btn" type="button">' + esc(LANG === "hi" ? T("toEnglish") : T("toHindi")) + "</button>";
+    if (ex) h += '<a class="back-btn" href="index.html">' + ICON("left") + esc(T("allDesigns")) + "</a>";
     return h;
   }
 
@@ -314,18 +403,46 @@
     return '<svg class="divider" viewBox="0 0 200 20" aria-hidden="true"><path d="M0 10H80M120 10H200"/><path class="fill" d="M100 2l8 8-8 8-8-8z"/></svg>';
   }
 
+  /* A decorated doli (palanquin) for the opening screen. */
+  function doliHTML() {
+    var scallops = "";
+    for (var i = 0; i < 9; i++) scallops += '<path d="M' + (68 + i * 16) + ' 74q6 8 12 0" fill="none" stroke="var(--accent-soft)" stroke-width="2"/>';
+    var hem = "";
+    for (var j = 0; j < 6; j++) { var x = 80 + j * 17; hem += '<path d="M' + x + ' 158q8 9 16 0z" fill="#8E1C2A"/><path d="M' + (x + 8) + ' 162v9" stroke="var(--accent)" stroke-width="2"/>'; }
+    var pts = [[66, 66], [84, 51], [104, 42], [130, 38], [156, 42], [176, 51], [194, 66]], garland = "";
+    for (var k = 0; k < pts.length; k++) garland += '<circle cx="' + pts[k][0] + '" cy="' + pts[k][1] + '" r="3.2" fill="' + (k % 2 ? "#F5B944" : "#F58A3C") + '"/>';
+    return '<div class="doli" aria-hidden="true"><svg viewBox="0 0 260 180">' +
+      '<rect x="6" y="14" width="248" height="9" rx="4.5" fill="#7A4A1E"/>' +
+      '<circle cx="12" cy="18" r="7" fill="#5E3714"/><circle cx="248" cy="18" r="7" fill="#5E3714"/>' +
+      '<path d="M80 23V48M180 23V48" stroke="#5E3714" stroke-width="3"/>' +
+      '<path d="M130 42V30" stroke="var(--accent)" stroke-width="3"/><circle cx="130" cy="26" r="6" fill="var(--accent)"/>' +
+      '<path d="M130 20c3-6 0-12 0-12-2 4-3 8 0 12z" fill="#7FA657"/>' +
+      '<path d="M60 74Q130 24 200 74Z" fill="var(--accent)"/>' +
+      '<path d="M72 66Q130 34 188 66" fill="none" stroke="var(--accent-soft)" stroke-width="3"/>' +
+      scallops +
+      '<rect x="76" y="72" width="108" height="86" rx="3" fill="#B0263A"/>' +
+      '<rect x="74" y="70" width="112" height="9" rx="3" fill="var(--accent)"/>' +
+      '<path d="M92 82V150M110 82V152M130 82V154M150 82V152M168 82V150" stroke="#8E1C2A" stroke-width="3" opacity=".8"/>' +
+      '<rect x="76" y="110" width="108" height="6" fill="var(--accent)" opacity=".9"/>' +
+      hem + garland +
+      "</svg></div>";
+  }
+
+  var GATE_BY_TYPE = { wedding: "doli", engagement: "fade", reception: "doli", anniversary: "fade", birthday: "zoom", housewarming: "unfold", babyshower: "zoom", naming: "curtain", mundan: "curtain", puja: "unfold", party: "zoom" };
   function gateHTML(c) {
     var g = c.gate;
     var pattern = "";
-    return '<div class="gate" id="gate">' +
+    var anim = /^(doors|curtain|unfold|fade|zoom|doli)$/.test(g.anim || "") ? g.anim : (GATE_BY_TYPE[c.type] || "doors");
+    return '<div class="gate gate-' + anim + '" id="gate">' +
+      (anim === "doli" ? doliHTML() : "") +
       '<div class="door l"><span class="knob"></span></div><div class="door r"><span class="knob"></span></div>' +
       '<div class="gate-card">' +
       (has(c.topLine) ? '<p class="top-line small">' + txt(c.topLine) + "</p>" : "") +
       emblemHTML(c.emblem) +
-      (c.guest ? '<p class="gate-dear">Dear ' + esc(c.guest) + ",</p>" : "") +
+      (c.guest ? '<p class="gate-dear">' + esc(T("dear")) + esc(c.guest) + ",</p>" : "") +
       '<p class="gate-title">' + esc(g.title || c.typeDef.gateTitle) + "</p>" +
       (c.names.length ? '<p class="gate-names">' + namesHTML(c.names, c.joiner) + "</p>" : "") +
-      '<button class="btn solid gate-btn" type="button" id="gate-btn">' + esc(g.button || "Open Invitation") + "</button>" +
+      '<button class="btn solid gate-btn" type="button" id="gate-btn">' + esc(g.button || T("openInvitation")) + "</button>" +
       pattern + "</div></div>";
   }
 
@@ -383,16 +500,16 @@
       tick(); setInterval(tick, 1000);
     }
 
-    /* share */
+    /* small status toast (used by RSVP) */
     var toast = $("#toast"), tt;
     function say(m) { toast.textContent = m; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove("show"); }, 2600); }
-    $("#share-btn").addEventListener("click", function () {
-      var url = location.href.split("?")[0];
-      var data = { title: c.pageTitle, text: c.shareText || "You're invited! " + c.pageTitle, url: url };
-      if (navigator.share) { navigator.share(data).catch(function () {}); return; }
-      var wa = "https://wa.me/?text=" + encodeURIComponent(data.text + "\n" + url);
-      if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { say("Link copied — paste it anywhere to share"); }, function () { window.open(wa, "_blank"); });
-      else window.open(wa, "_blank");
+
+    /* language toggle — reload with ?lang= so every string re-renders cleanly */
+    var langBtn = $("#lang-btn");
+    if (langBtn) langBtn.addEventListener("click", function () {
+      var u = new URL(location.href);
+      u.searchParams.set("lang", LANG === "hi" ? "en" : "hi");
+      location.href = u.toString();
     });
 
     /* RSVP via WhatsApp */
@@ -401,19 +518,19 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         var name = form.name.value.trim(), err = $("#r-err");
-        if (!name) { err.textContent = "Please enter your name."; form.name.focus(); return; }
+        if (!name) { err.textContent = T("needName"); form.name.focus(); return; }
         err.textContent = "";
         var yes = form.att.value === "yes";
         var lines = [
-          (yes ? "🙏 Namaste! We will be there." : "🙏 Namaste! Sorry, we won't be able to make it."),
-          "Name: " + name,
-          yes ? "Guests: " + (form.num.value || "1") : "",
-          form.msg.value.trim() ? "Message: " + form.msg.value.trim() : "",
+          (yes ? T("waYes") : T("waNo")),
+          T("waName") + name,
+          yes ? T("waGuests") + (form.num.value || "1") : "",
+          form.msg.value.trim() ? T("waMsg") + form.msg.value.trim() : "",
           "— " + c.pageTitle
         ].filter(Boolean);
         var num = String(c.rsvp.whatsapp).replace(/[^\d]/g, "");
         window.open("https://wa.me/" + num + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
-        say(yes ? "Thank you! Opening WhatsApp…" : "Thank you for letting us know.");
+        say(yes ? T("thanksYes") : T("thanksNo"));
       });
     }
 
@@ -486,17 +603,27 @@
     c.decor = Array.isArray(cfg.decor) ? cfg.decor : typeDef.decor;
     c.events = Array.isArray(cfg.events) ? cfg.events.filter(function (e) { return e && has(e.title); }) : [];
     c.contacts = Array.isArray(cfg.contacts) ? cfg.contacts.filter(function (p) { return p && (has(p.name) || has(p.phone)); }) : [];
+    c.parties = Array.isArray(cfg.parties) ? cfg.parties.filter(function (p) { return p && has(p.name); }) : [];
     c.when = parseWhen(cfg.date, cfg.timezone);
     c.gate = cfg.gate === false ? null : Object.assign({}, cfg.gate || {});
     c.pageTitle = cfg.pageTitle || [c.heading, c.names.join(" " + c.joiner + " ")].filter(has).join(" · ") || "Invitation";
     var q = new URLSearchParams(location.search);
     c.guest = (q.get("to") || "").slice(0, 80);
 
+    var langPick = q.get("lang") || cfg.lang || cfg.language || "en";
+    LANG = langPick === "hi" ? "hi" : "en";
+    c.lang = LANG;
+
     document.title = c.pageTitle;
-    if (has(cfg.language)) document.documentElement.lang = cfg.language;
+    document.documentElement.lang = LANG;
     var palette = (typeof cfg.palette === "object" && cfg.palette) ? Object.assign({}, PALETTES[typeDef.palette], cfg.palette)
       : PALETTES[cfg.palette] || PALETTES[typeDef.palette] || PALETTES.maroon;
     applyPalette(palette, cfg.style || typeDef.style);
+    if (isLightColor(palette.bg)) document.body.classList.add("mode-light");
+    document.body.classList.add("density-" + (cfg.density === "comfortable" ? "comfortable" : "compact"));
+    var entrance = /^(rise|zoom|fade|slide|flip|drop|blur|pop|pan|tilt)$/.test(cfg.entrance || "") ? cfg.entrance : (typeDef.entrance || "rise");
+    document.body.classList.add("enter-" + entrance);
+    c.map = cfg.map;
 
     var photos = cfg.photos || {};
     var found = await Promise.all([findCover(photos.cover), findGallery(photos.gallery), findMusic(cfg.music)]);
@@ -508,11 +635,32 @@
     wire(c);
   }
 
+  /* Decode an invitation packed into the link (#i=… made by the builder).
+     base64url( JSON ) — no server needed, the link carries everything. */
+  function decodePacked() {
+    var m = /[#&]i=([^&]+)/.exec(location.hash || "");
+    if (!m) return null;
+    try {
+      var b64 = m[1].replace(/-/g, "+").replace(/_/g, "/");
+      while (b64.length % 4) b64 += "=";
+      return JSON.parse(decodeURIComponent(escape(atob(b64))));
+    } catch (e) { return null; }
+  }
+
   /* Load config.js — or a sample with ?example=birthday — then start */
   var problem = null;
   window.addEventListener("error", function (e) {
     if (e && e.filename && /config\.js|examples\//.test(e.filename)) problem = e.message + " (line " + e.lineno + ")";
   });
+
+  var packed = decodePacked();
+  if (packed) {
+    window.INVITE = packed;
+    try { start(); }
+    catch (err) { console.error(err); showProblem("This invitation link looks damaged. Ask the host to share it again."); }
+    return;
+  }
+
   var ex = new URLSearchParams(location.search).get("example");
   var src = ex && /^[a-z0-9-]+$/.test(ex) ? "examples/" + ex + ".js" : "config.js";
   loadScript(src).then(start, function () {

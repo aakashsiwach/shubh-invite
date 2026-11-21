@@ -1,0 +1,80 @@
+<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Elegant Indian bride and groom illustration">
+  <defs>
+    <style>
+      .fg{fill:#6E1A28}.fg2{fill:#7E1830}.sk{fill:#E8C9A8}
+      .g{fill:#C8952F}.gD{fill:#9C6F22}
+      .gl{stroke:#C8952F;stroke-width:1.6;fill:none;stroke-linecap:round}
+      .gl2{stroke:#E0B457;stroke-width:1.1;fill:none;stroke-linecap:round}
+    </style>
+  </defs>
+
+  <!-- backdrop -->
+  <circle cx="150" cy="150" r="118" fill="#FBF1DD"/>
+  <circle cx="150" cy="150" r="114" fill="none" stroke="#E0B457" stroke-width="1" opacity=".6"/>
+  <circle cx="150" cy="150" r="106" fill="none" stroke="#C8952F" stroke-width="1" stroke-dasharray="1.5 5" opacity=".5"/>
+  <ellipse cx="150" cy="384" rx="104" ry="11" fill="#000" opacity=".06"/>
+
+  <!-- ================= GROOM (left) ================= -->
+  <g>
+    <!-- coat -->
+    <path class="fg" d="M94 126q0-15 22-17 22 2 22 17l-4 182q-18 7-36 0z"/>
+    <!-- churidar legs -->
+    <path class="fg2" d="M104 300h10l-2 74h-8z"/><path class="fg2" d="M118 300h10l-1 74h-8z"/>
+    <!-- mojari -->
+    <path class="fg" d="M100 374q-2-7 7-7h7q3 4 0 8h-13z"/><path class="fg" d="M116 374q-2-7 7-7h7q3 4 0 8h-13z"/>
+    <path class="gl2" d="M104 368q4-2 6 0M120 368q4-2 6 0"/>
+    <!-- gold placket + buttons -->
+    <path class="gl" d="M116 112v190"/>
+    <circle class="g" cx="116" cy="150" r="2.2"/><circle class="g" cx="116" cy="172" r="2.2"/><circle class="g" cx="116" cy="194" r="2.2"/><circle class="g" cx="116" cy="216" r="2.2"/>
+    <!-- gold stole edge -->
+    <path class="gl2" d="M131 124q-10 90 0 180"/>
+    <!-- kamarband -->
+    <path class="gl" d="M99 250q17 7 34 0"/><path class="gl2" d="M99 256q17 7 34 0"/>
+    <!-- neck + head -->
+    <rect class="sk" x="110" y="110" width="12" height="16" rx="5"/>
+    <circle class="sk" cx="116" cy="98" r="15"/>
+    <!-- safa / turban -->
+    <path class="fg" d="M100 96q1-25 16-25t16 25q-16 9-32 0z"/>
+    <path class="gl2" d="M102 92q14 7 28 0"/><path class="gl2" d="M103 85q13 6 26 0"/>
+    <path class="fg2" d="M131 80q11-6 13 3-7 4-13 1z"/>
+    <path class="gl" d="M116 72V60"/><circle class="g" cx="116" cy="58" r="3.4"/>
+  </g>
+
+  <!-- ================= BRIDE (right) ================= -->
+  <g>
+    <!-- lehenga -->
+    <path class="fg" d="M184 182q-14 2-18 22l-22 170h80l-22-170q-4-20-18-22z"/>
+    <path class="fg2" d="M150 358h68l-2 16h-64z"/>
+    <path class="gl2" d="M156 330h56"/><path class="gl2" d="M162 298h44"/>
+    <path class="gl2" d="M178 232v120"/><path class="gl2" d="M190 230v124"/>
+    <!-- choli -->
+    <path class="fg" d="M172 134h24l4 50q-16 7-32 0z"/>
+    <!-- dupatta side -->
+    <path class="fg2" d="M200 118q16 7 18 42l-6 190-12-2 8-190q-4-28-16-36z" opacity=".9"/>
+    <path class="gl2" d="M208 170l-5 178" opacity=".7"/>
+    <!-- neck + head -->
+    <rect class="sk" x="178" y="112" width="12" height="16" rx="5"/>
+    <circle class="sk" cx="184" cy="100" r="14"/>
+    <!-- hair bun -->
+    <path class="fg" d="M196 104a7 7 0 1 1 0-1z"/>
+    <!-- dupatta over head -->
+    <path class="fg" d="M168 100q0-22 16-22t16 22q-16-9-32 0z"/>
+    <path class="gl2" d="M170 96q14-9 28 0"/>
+    <!-- jewellery: necklace, maang tikka, earring, nath -->
+    <path class="gl" d="M174 130q10 9 20 0"/><path class="gl2" d="M171 129q13 13 26 0"/>
+    <circle class="g" cx="184" cy="138" r="1.8"/>
+    <path class="gl" d="M184 86v-6"/><circle class="g" cx="184" cy="78" r="2.4"/>
+    <circle class="g" cx="170" cy="106" r="2"/><circle class="g" cx="198" cy="106" r="2"/>
+    <path class="gl2" d="M188 98q6 0 5 8"/>
+    <!-- bangle hint -->
+    <path class="gl2" d="M170 190q8 4 16 0"/>
+  </g>
+
+  <!-- floral sprigs at base -->
+  <g>
+    <path class="gl2" d="M74 374q10-16 26-18" style="stroke:#9CB06A;stroke-width:2.4"/>
+    <path class="gl2" d="M226 374q-10-16-26-18" style="stroke:#9CB06A;stroke-width:2.4"/>
+    <circle class="g" cx="74" cy="370" r="5"/><circle cx="66" cy="375" r="3.5" fill="#D8626B"/>
+    <circle class="g" cx="226" cy="370" r="5"/><circle cx="234" cy="375" r="3.5" fill="#D8626B"/>
+  </g>
+</svg>
