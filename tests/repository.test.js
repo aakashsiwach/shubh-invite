@@ -66,7 +66,10 @@ test("original template catalogue contains 100 valid occasion presets", () => {
     assert.ok(["wedding", "engagement", "anniversary", "birthday", "babyshower", "housewarming", "puja", "party"].includes(item.type));
     assert.ok(item.config.palette && Array.isArray(item.config.effects) && Array.isArray(item.config.decor));
   }
-  for (const motif of ["krishna", "radha", "shiv", "ram-sita", "lakshmi", "saraswati"]) {\n    assert.ok(catalogue.some((item) => item.config.motif === motif), `Missing devotional motif: ${motif}`);\n  }\n  const categories = new Set(catalogue.map((item) => item.category));
+  for (const motif of ["krishna", "radha", "shiv", "ram-sita", "lakshmi", "saraswati"]) {
+    assert.ok(catalogue.some((item) => item.config.motif === motif), `Missing devotional motif: ${motif}`);
+  }
+  const categories = new Set(catalogue.map((item) => item.category));
   for (const category of ["wedding", "engagement", "anniversary", "birthday", "baby", "house", "puja", "festival", "party"]) {
     assert.ok(categories.has(category), `Missing template category: ${category}`);
   }
