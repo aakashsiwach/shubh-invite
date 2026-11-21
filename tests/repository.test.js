@@ -55,12 +55,12 @@ test("shared invitation payloads round-trip Unicode through base64url", () => {
   assert.deepEqual(decoded, payload);
 });
 
-test("original template catalogue contains 100 valid occasion presets", () => {
+test("expanded template catalogue contains 112 valid occasion presets", () => {
   const context = { window: {} };
   vm.runInNewContext(read("assets/js/template-catalog.js"), context, { filename: "template-catalog.js" });
   const catalogue = context.window.SHUBH_TEMPLATES;
   assert.ok(catalogue.length >= 112);
-  assert.equal(new Set(catalogue.map((item) => item.id)).size, 100);
+  assert.equal(new Set(catalogue.map((item) => item.id)).size, 112);
   for (const item of catalogue) {
     assert.ok(item.name && item.category && item.config);
     assert.ok(["wedding", "engagement", "anniversary", "birthday", "babyshower", "housewarming", "puja", "party"].includes(item.type));
