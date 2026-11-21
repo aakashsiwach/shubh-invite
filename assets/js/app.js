@@ -391,7 +391,7 @@
     }
     h += '<div class="toast" id="toast" role="status" aria-live="polite"></div>';
     h += '<button class="lang-btn" id="lang-btn" type="button">' + esc(LANG === "hi" ? T("toEnglish") : T("toHindi")) + "</button>";
-    if (ex) h += '<a class="back-btn" href="index.html">' + ICON("left") + esc(T("allDesigns")) + "</a>";
+    if (new URLSearchParams(location.search).has("example")) h += '<a class="back-btn" href="index.html">' + ICON("left") + esc(T("allDesigns")) + "</a>";
     return h;
   }
 
