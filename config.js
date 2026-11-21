@@ -85,22 +85,15 @@ window.INVITE = {
      "auto" = play music/song.mp3 if it exists · "none" = no music      */
   music: "auto",
 
-  /* ---- 9. RSVP on WhatsApp ------------------------------------------
-     Your WhatsApp number with country code, no + or spaces.
-     Leave "" to hide the RSVP form.                                    */
-  rsvp: {
-    whatsapp: "919876543210",
-    by: "1st February 2027"
-  },
 
-  /* ---- 10. Bottom of the page --------------------------------------- */
+  /* ---- 9. Bottom of the page --------------------------------------- */
   footer:      "Your presence and blessings are our greatest gift",
   compliments: "Sharma & Mehta Families",
   contacts: [
     { name: "Rohit Sharma", phone: "+91 98765 43210" }
   ],
 
-  /* ---- 11. Opening screen (doors that open with a tap) --------------
+  /* ---- 10. Opening screen (doors that open with a tap) --------------
      Personal touch: share your link as  …/?to=Gupta Family
      and the guest sees "Dear Gupta Family," on the opening screen.     */
   gate: {
