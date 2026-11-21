@@ -357,19 +357,6 @@
     if (c.when) h += '<p class="save-date">' + esc(T("saveDateNote")) + "</p>";
     h += '<div class="actions">' + actions + "</div></div></section>";
 
-    /* RSVP */
-    var r = c.rsvp || {};
-    if (has(r.whatsapp)) {
-      h += '<section class="section paper"><div class="wrap form-wrap reveal"><h2 class="title center">' + esc(r.title || T("rsvp")) + "</h2>";
-      if (has(r.by)) h += '<p class="sub center">' + esc(T("respondBy")) + esc(r.by) + "</p>";
-      h += '<form id="rsvp" class="rsvp" novalidate>' +
-        '<label for="r-name">' + esc(T("yourName")) + '</label><input id="r-name" name="name" type="text" autocomplete="name" required value="' + esc(c.guest || "") + '">' +
-        '<label for="r-att">' + esc(T("willAttend")) + '</label><select id="r-att" name="att"><option value="yes">' + esc(T("accept")) + '</option><option value="no">' + esc(T("decline")) + "</option></select>" +
-        '<label for="r-num">' + esc(T("numGuests")) + '</label><input id="r-num" name="num" type="number" min="1" max="50" value="2" inputmode="numeric">' +
-        '<label for="r-msg">' + esc(T("messageOpt")) + '</label><textarea id="r-msg" name="msg" rows="3"></textarea>' +
-        '<p class="form-err" id="r-err" role="alert"></p>' +
-        '<button class="btn solid wide" type="submit">' + ICON("chat") + esc(T("sendRsvp")) + "</button></form></div></section>";
-    }
 
     /* FOOTER */
     h += '<footer class="footer"><div class="wrap narrow center">';
@@ -512,27 +499,6 @@
       location.href = u.toString();
     });
 
-    /* RSVP via WhatsApp */
-    var form = $("#rsvp");
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var name = form.name.value.trim(), err = $("#r-err");
-        if (!name) { err.textContent = T("needName"); form.name.focus(); return; }
-        err.textContent = "";
-        var yes = form.att.value === "yes";
-        var lines = [
-          (yes ? T("waYes") : T("waNo")),
-          T("waName") + name,
-          yes ? T("waGuests") + (form.num.value || "1") : "",
-          form.msg.value.trim() ? T("waMsg") + form.msg.value.trim() : "",
-          "— " + c.pageTitle
-        ].filter(Boolean);
-        var num = String(c.rsvp.whatsapp).replace(/[^\d]/g, "");
-        window.open("https://wa.me/" + num + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
-        say(yes ? T("thanksYes") : T("thanksNo"));
-      });
-    }
 
     /* gallery lightbox */
     var lb = $("#lb");

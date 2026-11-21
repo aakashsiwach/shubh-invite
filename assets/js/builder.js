@@ -226,10 +226,6 @@
       { k: "gallery", label: "Gallery photo URLs", type: "textarea", help: "One link per line" },
       { k: "music", label: "Music URL (mp3)", type: "url" }
     ] },
-    { title: "RSVP on WhatsApp", fields: [
-      { k: "rsvp.whatsapp", label: "WhatsApp number", type: "tel", placeholder: "919876543210", help: "Country code + number, digits only" },
-      { k: "rsvp.by", label: "Reply by", type: "text", placeholder: "1st February 2027" }
-    ] },
     { title: "Footer", fields: [
       { k: "footer", label: "Footer message", type: "text", placeholder: "Your blessings are our greatest gift" },
       { k: "compliments", label: "With compliments", type: "text", placeholder: "Sharma & Mehta Families" }
